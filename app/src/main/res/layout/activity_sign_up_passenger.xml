@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+
+    <ImageView
+        android:layout_width="89dp"
+        android:layout_height="60dp"
+        android:src="@drawable/bylogo2"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="85dp"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        android:fontFamily="@font/poppins"
+        android:text="Create your account"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Full name"
+        android:padding="11dp"
+        android:textStyle="bold"
+        android:textColorHint="@color/black"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Email"
+        android:padding="11dp"
+        android:textColorHint="@color/black"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Password"
+        android:padding="11dp"
+        android:textColorHint="@color/black"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/confirm"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="430dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Confirm your password"
+        android:padding="11dp"
+        android:textColorHint="@color/black"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/mobilenumber"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="490dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:drawableLeft="@drawable/phflag"
+        android:fontFamily="@font/poppins"
+        android:hint="+63"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/checking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobilenumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:checked="true"
+        android:fontFamily="@font/poppins"
+        android:text="By checking the box you agree to our terms and agreement"
+        android:textColor="@color/black"
+        android:textSize="11dp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cont"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/checking"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="@color/figma"
+        android:fontFamily="@font/poppins"
+        android:text="Continue"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/already"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/cont"
+        android:fontFamily="@font/poppins"
+        android:text="Already have an account?"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="270dp"
+        android:textColor="@color/greenlink"
+        android:clickable="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/cont"
+        android:fontFamily="@font/poppins"
+        android:text="Sign In"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

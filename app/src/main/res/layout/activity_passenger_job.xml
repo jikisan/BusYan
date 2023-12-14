@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerJob">
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round2"
+        android:hint="Search Jobs"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        app:drawableEndCompat="@drawable/passengersearch" />
+       "/>
+
+    <TextView
+        android:id="@+id/spealization"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Specialization"
+        android:layout_below="@id/tv_search"
+        android:textSize="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/poppins_bold"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_busDriver"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:backgroundTint="@color/cardcolor2"
+        app:cornerRadius="10dp"
+        android:layout_below="@id/spealization"
+        android:layout_marginLeft="25dp"
+        android:text="Bus Driver"
+        android:textSize="20dp"
+        android:defaultFocusHighlightEnabled="true"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_busConductor"
+        android:layout_width="160dp"
+        android:layout_height="150dp"
+        android:backgroundTint="@color/cardcolor2"
+        app:cornerRadius="10dp"
+        android:layout_below="@id/spealization"
+        android:layout_marginLeft="205dp"
+        android:text="Bus Conductor"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <ImageView
+        android:id="@+id/iv_tempAddJobBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+</RelativeLayout>

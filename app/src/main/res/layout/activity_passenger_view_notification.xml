@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerViewNotification">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/rectangleprofile"
+        android:layout_marginTop="-650dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/eclipseprofile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit"
+        android:visibility="gone"
+        android:layout_marginTop="152dp"
+        android:layout_marginLeft="215dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Profile"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/cardcolor6"
+        android:fontFamily="@font/poppins"
+        android:hint="Loading..."
+        android:padding="11dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColorHint="@color/black"
+        />
+
+    <LinearLayout
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bus_marker"
+            android:layout_margin="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvBusCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Loading..."
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Distance: "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arrival Time: "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvArrivalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plate No: "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvPlateNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Loading..."
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cornerRadius="10dp"
+        android:layout_below="@id/description"
+        android:layout_marginTop="35dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:text="Cancel Reservation"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins"/>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomNavigationView"
+        android:visibility="gone"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+</RelativeLayout>

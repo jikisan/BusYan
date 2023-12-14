@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/item1"
+        android:title="13C"/>
+
+    <item android:id="@+id/item2"
+        android:title="13B"/>
+
+    <item android:id="@+id/item3"
+        android:title="62B"/>
+
+    <item android:id="@+id/item4"
+        android:title="62C"/>
+
+    <item android:id="@+id/item5"
+        android:title="17B"/>
+
+    <item android:id="@+id/item6"
+        android:title="17C"/>
+
+    <item android:id="@+id/item7"
+        android:title="04H"/>
+
+
+
+
+</menu>

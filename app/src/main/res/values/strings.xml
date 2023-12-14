@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">BusYanCapstone</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_company">
+        CEBU CFI Community Cooperative and PITAM Transport
+        Cooperative launch 38 Modern Jeepneys for Cebu City.
+
+        \n\n
+        The Cebu CFI Community Cooperative launches the 38
+        Foton Euro 4 Modern Jeepneys and turns over to Pit-os,
+        Mandaue Transport Cooperative (PITMACO)
+        on, February 18, 2021, at the Cebu Provincial Capitol
+        Grounds.
+
+        \n\n
+        PITAMCO\'s modern jeepneys have standard and
+        adjustable seating, expanded vehicle height, air
+        condition, CCTV, BEEP AFCS (Automatic Fare Collection
+        System), GPS, and Wi-Fi,
+
+    </string>
+
+    <string name="seatReservationTitle">Seat Reservation</string>
+    <string name="seatReservationMessage"> reserve a bus seat.</string>
+
+    <string name="seatReservationAcceptTitle">Seat Reservation Accepted</string>
+    <string name="seatReservationAcceptMessage"> accepts your bus seat reservation.</string>
+
+    <string name="seatReservationFullTitle">Seat Reservation Full</string>
+    <string name="seatReservationFullMessage"> seats are full.</string>
+
+    <string name="seatReservationCancelTitle">Seat Reservation Cancel</string>
+    <string name="seatReservationCancelMessage"> cancel your bus seat reservation.</string>
+
+    <string name="signInError">Invalid username or password. Please try again.</string>
+
+
+</resources>

@@ -1,0 +1,176 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerEditProfile">
+
+
+    <TextView
+        android:id="@+id/tv_rectangleprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rectangleprofile"/>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Profile"
+        android:textSize="30dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profilePic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:src="@drawable/eclipseprofile" />
+
+    <ImageView
+        android:id="@+id/iv_uploadPhotoBtn"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/iv_profilePic"
+        android:layout_alignBottom="@+id/iv_profilePic"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/edit" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/iv_profilePic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Full name"
+        android:padding="11dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:fontFamily="@font/poppins"
+        android:hint="Email Address"
+        android:padding="11dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round"
+        android:backgroundTint="@color/figma6"
+        android:drawableLeft="@drawable/phflag"
+        android:fontFamily="@font/poppins"
+        android:hint="Phone Number"
+        android:padding="11dp"
+        android:textStyle="bold" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/linepro"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:src="@drawable/profileline"-->
+<!--        android:layout_below="@id/number"-->
+<!--        android:layout_marginTop="-330dp"/>-->
+
+    <TextView
+        android:id="@+id/link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/number"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="57dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Linked Accounts"
+        android:textColor="#A6000000" />
+
+    <TextView
+        android:id="@+id/linkgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/link"
+        android:text="Google"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="65dp"
+        android:fontFamily="@font/poppins_medium"/>
+
+    <ImageView
+        android:id="@+id/googlel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/google"
+        android:layout_below="@id/link"
+        android:layout_marginLeft="15dp"/>
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_googleSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/link"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="-2dp"
+        android:clickable="false"
+        android:thumb="@drawable/toggle_on_off"
+        app:track="@drawable/track" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/googlel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/figma"
+        android:fontFamily="@font/poppins"
+        android:text="Update Profile"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SavedBus">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <TextView
+        android:id="@+id/busdes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins"
+        android:text="Saved"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Job"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/busdes"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="85dp"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/bussaved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bus"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_below="@id/busdes"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="285dp"
+        android:clickable="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/saveline"
+        android:layout_below="@id/job"
+        android:layout_marginLeft="250dp"/>
+
+    <TextView
+        android:id="@+id/buscode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/job"
+        android:text="  13C"
+        android:fontFamily="@font/poppins_semibold"
+        android:drawableStart="@drawable/bussave"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="45dp"/>
+
+    <TextView
+        android:id="@+id/viewjob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/job"
+        android:text="View"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="315dp"
+        android:clickable="true"/>
+
+
+</RelativeLayout>

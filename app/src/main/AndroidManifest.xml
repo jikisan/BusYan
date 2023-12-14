@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BusYanCapstone"
+        tools:targetApi="31">
+        <activity
+            android:name=".AddJob"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerViewNotification"
+            android:exported="false" />
+        <activity
+            android:name=".ReserveConfirmed"
+            android:exported="false" />
+        <activity
+            android:name=".ReserveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewNotification"
+            android:exported="false" />
+        <activity
+            android:name=".BusStartingPage"
+            android:exported="false" />
+        <activity
+            android:name=".VerificationBus"
+            android:exported="false" />
+        <activity
+            android:name=".BusRouteDescription"
+            android:exported="false" />
+        <activity
+            android:name=".BusRoutePage"
+            android:exported="false" />
+        <activity
+            android:name=".BusSearchPage"
+            android:exported="false" />
+        <activity
+            android:name=".SetReminder"
+            android:exported="false" />
+        <activity
+            android:name=".ReminderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedBus"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewProfile"
+            android:exported="false" />
+        <activity
+            android:name=".SavedPage"
+            android:exported="false" />
+        <activity
+            android:name=".ApplyPage"
+            android:exported="false" />
+        <activity
+            android:name=".AboutTheCompany"
+            android:exported="false" />
+        <activity
+            android:name=".BusDescription"
+            android:exported="false" />
+        <activity
+            android:name=".LogoutBus"
+            android:exported="false" />
+        <activity
+            android:name=".LogoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerJob"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerBus"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerNotification"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerProfile"
+            android:exported="false" />
+        <activity
+            android:name=".LocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HowActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".HowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HelpCenter"
+            android:exported="false" />
+        <activity
+            android:name=".AboutUs"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileMenu"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpPassenger"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PassengerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPageBus"
+            android:exported="false" />
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".BusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage"
+            android:exported="false" />
+        <activity
+            android:name=".Startingpage1"
+            android:exported="false" />
+        <activity
+            android:name=".Splashscreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <!-- AndroidManifest.xml -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC0haBF8csfumcV-_7_lKnZ8bvm4urxc_s" />
+
+<!--        <meta-data-->
+<!--            android:name="messageApi"-->
+<!--            android:value="Njg0ZTUwMzg0YTY1NzU3NzU4NjI2ZjUyNTUzNzUwMzI=" />-->
+
+    </application>
+
+</manifest>

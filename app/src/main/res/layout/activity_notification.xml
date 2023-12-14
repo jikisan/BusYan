@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotificationActivity">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins"
+        android:text="Notifications"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/notifListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp"
+        android:layout_below="@+id/header_title"
+        android:layout_above="@+id/bottomNavigationView"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/bottom_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+</RelativeLayout>

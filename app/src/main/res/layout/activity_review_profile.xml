@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewProfile">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <TextView
+        android:id="@+id/busdes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins"
+        android:text="Bus Driver"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/eclipseprofile"
+        android:layout_marginTop="85dp"
+        android:layout_marginLeft="270dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/passengerpic"
+        android:layout_marginTop="95dp"
+        android:layout_marginLeft="290dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jacky Taldo"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="95dp"
+        android:textSize="17dp"
+        android:layout_marginLeft="25dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jackytaldo@gmail.com"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="117dp"
+        android:layout_marginLeft="25dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+63 9123 456 7890"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="135dp"
+        android:layout_marginLeft="25dp"/>
+
+    <TextView
+        android:id="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Set your profile visibility"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="165dp"
+        android:layout_marginLeft="25dp"
+        android:textColor="@color/buttonColor"
+        android:drawableStart="@drawable/baseline_visibility_24"
+        android:clickable="true"/>
+
+    <ImageView
+        android:id="@+id/lineapply"
+        android:layout_width="370dp"
+        android:layout_height="50dp"
+        android:src="@drawable/applyline"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/set"
+        android:layout_marginTop="-10dp"/>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/work"
+        android:layout_width="360dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/lineapply"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round4"
+        android:fontFamily="@font/poppins_medium"
+        android:drawableRight="@drawable/editprofile"
+        android:paddingBottom="70dp"
+        android:text="   Work Experience"
+
+         />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/Education"
+        android:layout_width="360dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/work"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round4"
+        android:fontFamily="@font/poppins_medium"
+        android:drawableRight="@drawable/editprofile"
+        android:paddingBottom="70dp"
+        android:text="   Education"
+         />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/address"
+        android:layout_width="360dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/Education"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round4"
+        android:fontFamily="@font/poppins_medium"
+        android:drawableRight="@drawable/editprofile"
+        android:paddingBottom="70dp"
+        android:text="   Address"
+        />
+
+    <androidx.cardview.widget.CardView
+    android:layout_width="360dp"
+    android:layout_height="80dp"
+    android:id="@+id/driverlis_card"
+    android:clickable="true"
+    app:cardCornerRadius="10dp"
+    android:layout_alignBottom="@id/address"
+    android:backgroundTint="@color/cardcolor3"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="-95dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/driverslis"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+</RelativeLayout>

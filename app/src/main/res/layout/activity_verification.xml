@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context=".VerificationActivity">
+
+
+    <TextView
+        android:id="@+id/Verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:text="Verification Code"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/please"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Verify"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Please enter the 6 digit code"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <com.chaos.view.PinView
+        android:id="@+id/otp"
+        app:itemCount="6"
+        app:itemWidth="50dp"
+        app:itemHeight="50dp"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/please"
+        android:layout_centerHorizontal="true"
+        android:itemBackground="@color/white"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:cursorVisible="true"
+        app:hideLineWhenFilled="false"
+        app:itemRadius="10dp"
+        style="@style/PinWidget.PinView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/verifybtn"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/otp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:backgroundTint="@color/figma"
+        android:fontFamily="@font/poppins"
+        android:text="Verify"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/verifybtn"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Didn't receive any codes?"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/layoutTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/code"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Request new code in "
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="00:00"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/end_color"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvResendCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/code"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Resend Code"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

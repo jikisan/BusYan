@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutTheCompany">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <TextView
+        android:id="@+id/busdes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins"
+        android:text="Bus Driver"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/busimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/busdescription"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/busdes"
+        android:layout_marginTop="5dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Apply"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/buttonColor"
+        app:cornerRadius="12dp"
+        android:layout_below="@id/busimg"
+        android:layout_marginTop="12dp"
+        android:text="Apply"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="35dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Saved"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#888888"
+        app:cornerRadius="12dp"
+        android:layout_below="@id/busimg"
+        android:layout_marginTop="12dp"
+        android:text="Saved"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="220dp"/>
+
+    <ImageView
+        android:id="@+id/busline"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:src="@drawable/busdesline"
+        android:layout_below="@id/Apply"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/JobDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/busline"
+        android:text="Job Description"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginLeft="60dp"
+        android:clickable="true"/>
+
+
+    <TextView
+        android:id="@+id/AboutCom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/busline"
+        android:text="About the company"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginLeft="200dp"
+        android:clickable="true"/>
+
+    <ImageView
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/jobdesline"
+        android:layout_below="@id/JobDes"
+        android:layout_marginLeft="205dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aboutthecompany"
+        android:layout_below="@id/JobDes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"/>
+
+</RelativeLayout>

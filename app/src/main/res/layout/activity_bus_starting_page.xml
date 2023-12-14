@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusStartingPage">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/cardview" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#9D96A7"
+        app:cardCornerRadius="20dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_marginBottom="60dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/lyout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:gravity="top|center"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:gravity="top|center"
+                        >
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/locationOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="true"
+                            android:fontFamily="@font/poppins"
+                            android:text="Location"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/locationOn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="true"
+                            android:fontFamily="@font/poppins"
+                            android:text="Location"
+                            android:textColor="@color/white"
+                            app:backgroundTint="@color/greenlink"
+                            android:visibility="gone"
+                            app:cornerRadius="10dp" />
+
+                    </RelativeLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/buscode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/poppins"
+                        android:layout_margin="5dp"
+                        android:padding="2dp"
+                        android:text="Loading.."
+                        android:textColor="@color/black"
+                        app:cornerRadius="10dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/setroute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_margin="5dp"
+                        android:padding="2dp"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/poppins"
+                        android:text="Loading..."
+                        android:textColor="@color/black"
+                        app:cornerRadius="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/plate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/poppins"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="Loading...." />
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/bottom_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+</RelativeLayout>

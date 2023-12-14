@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "513683055597",
+    "firebase_url": "https://busyan-capstone-3430e-default-rtdb.firebaseio.com",
+    "project_id": "busyan-capstone-3430e",
+    "storage_bucket": "busyan-capstone-3430e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513683055597:android:680eb166c2f30d8ab07de4",
+        "android_client_info": {
+          "package_name": "com.example.busyancapstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513683055597-5i1uj4t9t503lqju6pcspiue2alartul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.busyancapstone",
+            "certificate_hash": "8d504955996fd94ce8679eb2b9960670a8f64def"
+          }
+        },
+        {
+          "client_id": "513683055597-4evi34bvj1udtvdlnajdkhgerabh7ckj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAuJOzKXlat5i1JIBscGuxOJKVfHHjP9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513683055597-4evi34bvj1udtvdlnajdkhgerabh7ckj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

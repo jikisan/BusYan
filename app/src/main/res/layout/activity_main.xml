@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+  <ImageView
+      android:id="@+id/cardbg"
+      android:layout_width="1000dp"
+      android:layout_height="1000dp"
+      android:src="@drawable/cardviewbg"
+      android:layout_marginBottom="-210dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+
+  <TextView
+      android:id="@+id/Sentence"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="45dp"
+      android:layout_marginTop="155dp"
+      android:fontFamily="@font/dm_sans_bold"
+      android:text="Which one are you?"
+      android:textColor="@color/white"
+      android:textSize="24dp"
+      android:textStyle="bold" />
+
+  <androidx.cardview.widget.CardView
+      android:layout_width="310dp"
+      android:layout_height="120dp"
+      android:id="@+id/BusDriver_card"
+      android:clickable="true"
+      app:cardCornerRadius="10dp"
+      android:layout_alignBottom="@id/Sentence"
+      android:backgroundTint="@color/figma5"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="-150dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/newbuscard"
+          android:padding="10dp"
+          android:layout_marginRight="10dp"/>
+
+
+
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+  <androidx.cardview.widget.CardView
+      android:layout_width="310dp"
+      android:layout_height="120dp"
+      android:id="@+id/Passenger_card"
+      android:clickable="true"
+      android:layout_alignBottom="@id/BusDriver_card"
+      android:backgroundTint="@color/figma5"
+      app:cardCornerRadius="10dp"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="-140dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/newcardpassenger"
+          android:layout_marginTop="10dp"
+          android:layout_marginLeft="2dp"
+          />
+
+
+
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

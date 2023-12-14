@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerActivity">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/passengereclipse"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Back!"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track your bus and"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="seek a job now"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="17dp"/>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:id="@+id/job_card"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="280dp"
+        android:backgroundTint="@color/cardcolor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-110dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="115dp"
+                android:layout_height="110dp"
+                android:background="@drawable/passengerjob"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                />
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:id="@+id/buspass_card"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@color/cardcolor1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/job_card"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="115dp"
+                android:layout_height="110dp"
+                android:background="@drawable/passengerbus"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                />
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>
