@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerProfile">
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/eclipseprofile"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/passengerpic"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="45dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jacky Taldo"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="55dp"
+        android:textSize="17dp"
+        android:layout_marginLeft="125dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jackytaldo@gmail.com"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="79dp"
+        android:layout_marginLeft="125dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/editpro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="130dp"
+        android:backgroundTint="@color/navbackground"
+        android:fontFamily="@font/poppins"
+        android:text="Edit Profile"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/myaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Account"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/saved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saved                                                                              "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/myaccount"
+        android:clickable="true"/>
+
+
+
+    <ImageView
+        android:id="@+id/passline"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:src="@drawable/newline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"/>
+
+    <TextView
+        android:id="@+id/general"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General"
+        android:layout_below="@+id/passline"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="-35dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/aboutus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Us                                                                       "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/general"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/Help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help Us                                                                          "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/aboutus"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout                                                                           "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/Help"
+        android:clickable="true"/>
+
+
+    <ImageView
+        android:layout_width="380dp"
+        android:layout_height="300dp"
+        android:src="@drawable/line3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="280dp"/>
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

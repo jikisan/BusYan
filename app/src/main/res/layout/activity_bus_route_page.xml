@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusRoutePage">
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/locationping"
+        android:layout_marginTop="65dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/swap"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="350dp"
+        android:backgroundTint="@color/white"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/location1"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/round6"
+        android:hint="Basilica Minore del Sto. Niño de Cebu"
+        android:fontFamily="@font/poppins"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/location2"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round6"
+        android:hint="Ayala Center Cebu"
+        android:fontFamily="@font/poppins"
+        android:layout_below="@id/location1"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"/>
+
+    <ImageView
+        android:id="@+id/locationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/locationbutton"
+        android:layout_below="@id/location2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="150dp"/>
+
+    <ImageView
+        android:id="@+id/busBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/busbutton"
+        android:layout_below="@id/location2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="250dp"/>
+
+    <ImageView
+        android:id="@+id/linebus"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:src="@drawable/busrouteline"
+        android:layout_below="@id/busBtn"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Recommended Route"
+        android:layout_below="@id/linebus"
+        android:layout_marginLeft="65dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thirteenc_card"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
+        android:layout_alignBottom="@id/linebus"
+        android:backgroundTint="@color/cardcolor2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/busroutecode"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"/>
+
+
+
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thirteenb_card"
+        android:clickable="true"
+        app:cardCornerRadius="10dp"
+        android:layout_alignBottom="@id/thirteenc_card"
+        android:backgroundTint="@color/cardcolor2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/thirteenbbus"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"/>
+
+
+
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</RelativeLayout>

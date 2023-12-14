@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReserveConfirmed">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/locationping"
+        android:layout_marginTop="65dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/swap"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="350dp"
+        android:backgroundTint="@color/white"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/location1"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/round6"
+        android:hint="Basilica Minore del Sto. Niño de Cebu"
+        android:fontFamily="@font/poppins"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/location2"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round6"
+        android:hint="Ayala Center Cebu"
+        android:fontFamily="@font/poppins"
+        android:layout_below="@id/location1"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"/>
+
+    <ImageView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gmap1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/reminder"
+        android:layout_below="@id/locationBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/areYouSure"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:text="You Reserve a bus seat. Wait for the confirmation by the driver if it is vacant or full."
+        android:textSize="11dp"
+        android:fontFamily="@font/poppins"
+        android:layout_below="@id/locationBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"/>
+
+    <TextView
+        android:id="@+id/Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="11dp"
+        android:layout_below="@id/areYouSure"
+        android:text="Cancel"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/greenlink"
+        android:layout_marginLeft="220dp"/>
+
+    <TextView
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textSize="11dp"
+        android:layout_below="@id/areYouSure"
+        android:text="OK"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/greenlink"
+        android:layout_marginLeft="290dp"/>
+
+
+
+    <ImageView
+        android:id="@+id/locationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/locationbutton"
+        android:layout_below="@id/location2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="150dp"/>
+
+    <ImageView
+        android:id="@+id/busBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/busbutton"
+        android:layout_below="@id/location2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="250dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/busrectangle"
+        android:layout_marginTop="525dp"/>
+
+    <ImageView
+        android:id="@+id/busLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/busline"
+        android:layout_marginTop="575dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/businfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/thirteen"
+        android:background="@drawable/round4"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/busLine1"
+        android:layout_marginTop="15dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/businfo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/thirteenb"
+        android:background="@drawable/round4"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/businfo"
+        android:layout_marginTop="5dp"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpCenter">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/bottom_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Help Center"
+        android:layout_marginTop="40dp"
+        android:textSize="25dp"
+        android:fontFamily="@font/poppins_medium"/>
+
+    <TextView
+        android:id="@+id/faqs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="FAQs"
+        android:layout_marginTop="125dp"
+        android:textSize="18dp"
+        android:fontFamily="@font/poppins_medium"/>
+
+    <TextView
+        android:id="@+id/trackbus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How to track a bus?                                                    "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/faqs"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/searchjob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="How to search a job?                                                 "
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16dp"
+        android:layout_below="@id/trackbus"
+        android:clickable="true"/>
+
+
+
+</RelativeLayout>

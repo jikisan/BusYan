@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusActivity">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/bottom_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/googlemap"
+        android:layout_marginTop="-95dp"/>
+
+    <ImageView
+        android:id="@+id/rectang"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/rectanglebus"
+        android:layout_marginTop="460dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/location"
+        app:cornerRadius="10dp"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        app:backgroundTint="@color/greenlink"
+        android:text="Location"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="8dp"
+        android:enabled="true"
+        android:onClick="onClick1"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buscode"
+        app:cornerRadius="10dp"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:backgroundTint="@color/white"
+        android:text="13C"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="128dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/setroute"
+        app:cornerRadius="10dp"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:backgroundTint="@color/white"
+        android:text="Talamban-Colon"
+        android:textSize="9dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="260dp"
+        />
+
+    <EditText
+        android:id="@+id/plate"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="25dp"
+        android:text="ABC 1234"
+        android:textColorHint="@color/black"
+        android:padding="5dp"
+        android:fontFamily="@font/poppins"
+        android:background="@color/white"
+        android:backgroundTint="@color/figma6" />
+
+
+
+
+</RelativeLayout>

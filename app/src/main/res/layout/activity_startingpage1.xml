@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Startingpage1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-600dp"
+        android:src="@drawable/newtop" />
+
+    <ImageView
+        android:id="@+id/By"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="220dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/bylogo2" />
+
+    <TextView
+        android:id="@+id/Sentence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="BusYan"
+        android:textColor="@color/black"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/ana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="345dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Bus and Job Search"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+         />
+
+
+    <ImageView
+        android:id="@+id/botv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="-600dp"
+        android:src="@drawable/bottomvector" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextbtn"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-160dp"
+        android:layout_alignBottom="@id/Sentence"
+        android:backgroundTint="@color/figma"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        app:cornerRadius="10dp"/>
+
+</RelativeLayout>

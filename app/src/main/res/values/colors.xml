@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="lavender">#8692f7</color>
+    <color name="grey">#d2d2d2</color>
+    <color name="button_color">#8494BA</color>
+
+
+
+    <color name="start_color">#12c2e9</color>
+    <color name="mid_color">#c471ed</color>
+    <color name="end_color">#f64f59</color>
+    <color name="figma">#8B819A</color>
+    <color name="figma1">#bcb6cb</color>
+    <color name="buttonColor">#6c7ba0</color>
+    <color name="figma2">#847a90</color>
+    <color name="figma3">#bfb7c8</color>
+    <color name="figma4">#aea6b7</color>
+    <color name="figma5">#9a8ca5</color>
+    <color name="figma6">#f6f6f6</color>
+    <color name="greenlink">#00b11c</color>
+    <color name="navbg">#bdb7c6</color>
+    <color name="navbackground">#9e97a8</color>
+    <color name="cardcolor">#c3c8d7</color>
+    <color name="cardcolor1">#cdc6d7</color>
+    <color name="cardcolor2">#EFEEF0</color>
+    <color name="buttoncolor">#ebe7ed</color>
+    <color name="textcolor">#756c83</color>
+    <color name="buttoncolor2">#000000</color>
+    <color name="buttoncolor3">#ECEBEF</color>
+    <color name="cardcolor3">#ebebef</color>
+    <color name="cardcolor4">#d6cdd6</color>
+    <color name="buttoncolor4">#D7D0E8</color>
+    <color name="cardcolor5">#F3F2F6</color>
+    <color name="cardcolor6">#F1f1f1</color>
+    <color name="buttoncolor1">#FF8888</color>
+    <color name="buttoncolor5">#86F498</color>
+
+</resources>

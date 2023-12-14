@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerSearchActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/round2"
+        android:backgroundTint="@color/cardcolor2"
+        android:text="   Bus Driver"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:drawableEnd="@drawable/passengersearch"
+        android:clickable="true"/>
+
+    <ImageView
+        android:id="@+id/jobsort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/jobsortlocation"
+        android:layout_below="@id/search"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="28dp"/>
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jobsort"
+        android:text="Recommended for you"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"/>
+
+    <ListView
+        android:id="@+id/jobListview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationView"
+        android:layout_below="@+id/textview"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="500dp"
+        android:layout_height="50dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_alignParentBottom="true"
+        android:background="@color/navbg"
+        android:elevation="2dp"
+        app:menu="@menu/passenger_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/item_selector"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"/>
+
+</RelativeLayout>
