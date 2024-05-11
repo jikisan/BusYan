@@ -369,8 +369,8 @@ public class ApplyPage extends AppCompatActivity {
                 lattitude,
                 licenseUrl,
                 etAdditionalInfo.getText().toString(),
-                Helper.getCurrentDate()
-
+                Helper.getCurrentDate(),
+                "pending"
         );
 
         FirebaseManager.addData(applicationDb, application);

@@ -16,11 +16,12 @@ public class Application {
     private String licenseUrl;
     private String additionalInfo;
     private String applicationDateCreated;
+    private String status;
 
     public Application() {
     }
 
-    public Application(String applicantId, String jobId, String profileUrl, String question1, String question2, String resumeUrl, String workExperience, String educationalAttainment, String address, double longitude, double latitude, String licenseUrl, String additionalInfo, String applicationDateCreated) {
+    public Application(String applicantId, String jobId, String profileUrl, String question1, String question2, String resumeUrl, String workExperience, String educationalAttainment, String address, double longitude, double latitude, String licenseUrl, String additionalInfo, String applicationDateCreated, String status) {
         this.applicantId = applicantId;
         this.jobId = jobId;
         this.profileUrl = profileUrl;
@@ -35,6 +36,15 @@ public class Application {
         this.licenseUrl = licenseUrl;
         this.additionalInfo = additionalInfo;
         this.applicationDateCreated = applicationDateCreated;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getApplicantId() {
