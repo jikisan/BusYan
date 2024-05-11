@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +77,7 @@ public class ApplyPage extends AppCompatActivity {
     private EditText etQuestion1, etQuestion2, etEducationalAttainment;
     private Button submit, btnUploadFile, btnUploadLicense, clickedButton;
     private BottomNavigationView bottomNavigationView;
+    private ProgressBar circleProgressBar;
 
     private Double lattitude, longitude;
     private Uri resumeUri, licenseUri, cameraUri;
@@ -299,6 +301,7 @@ public class ApplyPage extends AppCompatActivity {
     }
 
     private void submitApplication() {
+
         String question1 = etQuestion1.getText().toString().trim();
         String question2 = etQuestion2.getText().toString().trim();
         String workExperience = tv_workExperience.getText().toString().trim();
@@ -310,6 +313,8 @@ public class ApplyPage extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
+            circleProgressBar.setVisibility(View.VISIBLE);
+
             saveDataInDb(question1, question2, workExperience, educationalAttainment, address);
         }
     }
@@ -375,6 +380,7 @@ public class ApplyPage extends AppCompatActivity {
 
         FirebaseManager.addData(applicationDb, application);
 
+        circleProgressBar.setVisibility(View.GONE);
         new Helper(this).showToastLong("Application Sent!");
         startActivity(new Intent(this, PassengerJob.class));
     }
@@ -547,6 +553,8 @@ public class ApplyPage extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         iv_profilePic = findViewById(R.id.iv_profilePic);
         iv_uploadPhotoBtn = findViewById(R.id.iv_uploadPhotoBtn);
+
+        circleProgressBar = findViewById(R.id.progressBar);
 
         try {
             ApplicationInfo appInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
