@@ -87,6 +87,7 @@
         android:text="Don't have an account?"
         android:textStyle="bold"
         android:textSize="12dp"
+        android:visibility="gone"
         android:layout_below="@+id/loginbtn"
         android:layout_centerHorizontal="true"/>
 
@@ -99,6 +100,7 @@
         android:clickable="true"
         android:textStyle="bold"
         android:textSize="12dp"
+        android:visibility="gone"
         android:layout_below="@+id/loginbtn"
         android:layout_marginLeft="272dp"/>
 
@@ -110,6 +112,7 @@
         android:textColorHighlight="@color/greenlink"
         android:textStyle="bold"
         android:textSize="15dp"
+        android:visibility="gone"
         android:layout_below="@+id/signup"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
@@ -125,6 +128,7 @@
         android:text="Sign in with Google"
         android:textSize="16dp"
         android:textStyle="bold"
+        android:visibility="gone"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
