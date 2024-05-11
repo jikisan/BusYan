@@ -193,8 +193,6 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                                 arrLiveDrivers.add(liveDrivers);
                                 arrLiveBus.add(liveBus);
 
-
-
                                 // Add markers
                                 runOnUiThread(() -> {
                                     removePassengerMarkers();
@@ -208,20 +206,35 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                                     Collections.sort(arrLiveBus, new LiveBus.DistanceComparator());
                                     adapterBus.notifyDataSetChanged();
 
-                                    if(arrLiveBus.isEmpty()){
-                                        Log.d(TAG, "arrLiveBus is empty ");
-                                        busListView.setVisibility(View.GONE);
-                                        tvNoBus.setVisibility(View.VISIBLE);
-                                    }
-                                    else {
-                                        Log.d(TAG, "arrLiveBus is not empty ");
+                                    Log.d(TAG, "arrLiveBus is not empty ");
+                                    busListView.setVisibility(View.VISIBLE);
+                                    tvNoBus.setVisibility(View.GONE);
 
-                                        busListView.setVisibility(View.VISIBLE);
-                                        tvNoBus.setVisibility(View.GONE);
-                                    }
+//                                    if(arrLiveDrivers.isEmpty()){
+//                                        Log.d(TAG, "arrLiveBus is empty ");
+//                                        adapterBus.clearData();
+//                                        busListView.removeAllViews();
+//                                        adapterBus.notifyDataSetChanged();
+//                                        busListView.setVisibility(View.GONE);
+//                                        tvNoBus.setVisibility(View.VISIBLE);
+//                                    }
+//                                    else {
+//                                        Log.d(TAG, "arrLiveBus is not empty ");
+//
+//                                        busListView.setVisibility(View.VISIBLE);
+//                                        tvNoBus.setVisibility(View.GONE);
+//                                    }
                                 }
                             });
 
+                        }
+                        else {
+                            Log.d(TAG, "arrLiveBus is empty ");
+                            adapterBus.clearData();
+                            adapterBus.notifyDataSetChanged();
+                            mMap.clear();
+                            busListView.setVisibility(View.GONE);
+                            tvNoBus.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -476,8 +489,8 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         super.onPause();
 
         Log.d(TAG, "onPause: ");
-        stopLocationUpdates();
-        stopBusDriverUpdates();
+//        stopLocationUpdates();
+//        stopBusDriverUpdates();
     }
 
     @Override
@@ -485,8 +498,8 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         super.onStop();
 
         Log.d(TAG, "onStop: ");
-        stopLocationUpdates();
-        stopBusDriverUpdates();
+//        stopLocationUpdates();
+//        stopBusDriverUpdates();
         reservation.clear();
     }
 
@@ -495,8 +508,8 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         super.onDestroy();
 
         Log.d(TAG, "onDestroy: ");
-        stopLocationUpdates();
-        stopBusDriverUpdates();
+//        stopLocationUpdates();
+//        stopBusDriverUpdates();
         reservation.clear();
     }
 

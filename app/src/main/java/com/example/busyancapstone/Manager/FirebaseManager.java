@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.example.busyancapstone.Model.RevisionRequest;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.*;
 
@@ -42,10 +43,11 @@ public class FirebaseManager {
         return FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl();
     }
 
-    public static boolean setProfileImageUri(Uri imageUri) {
+    public static boolean setProfileImageUri(Uri imageUri, String fullName) {
 
         UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder()
                 .setPhotoUri(imageUri)
+                .setDisplayName(fullName)
                 .build();
 
         return FirebaseAuth.getInstance().getCurrentUser().updateProfile(changeRequest).isSuccessful();

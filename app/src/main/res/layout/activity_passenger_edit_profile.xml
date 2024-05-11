@@ -73,6 +73,7 @@
         android:fontFamily="@font/poppins"
         android:hint="Email Address"
         android:padding="11dp"
+        android:enabled="false"
         android:textStyle="bold" />
 
     <EditText

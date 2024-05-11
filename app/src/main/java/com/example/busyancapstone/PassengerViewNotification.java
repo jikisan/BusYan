@@ -74,20 +74,25 @@ public class PassengerViewNotification extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.passenger_notification);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+
             if (item.getItemId() == R.id.passenger_notification) {
 
                 return true;
-            } else if (item.getItemId() == R.id.passenger_profile) {
+            }
+            else if (item.getItemId() == R.id.passenger_profile) {
                 startActivity(new Intent(getApplicationContext(), PassengerProfile.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            } else if (item.getItemId() == R.id.passenger_home) {
+            }
+
+            else if (item.getItemId() == R.id.passenger_home) {
                 startActivity(new Intent(getApplicationContext(), PassengerActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
             }
+
             return false;
         });
 

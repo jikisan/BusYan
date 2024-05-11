@@ -25,7 +25,7 @@ public class ProfileMenu extends AppCompatActivity {
 
                 return true;
             } else if (item.getItemId() == R.id.bottom_home) {
-                startActivity(new Intent(getApplicationContext(), BusActivity.class));
+                startActivity(new Intent(getApplicationContext(), BusStartingPage.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;

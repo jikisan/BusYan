@@ -47,6 +47,7 @@ public class CustomAdapterBus extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.row_buses, null);
@@ -62,5 +63,11 @@ public class CustomAdapterBus extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    // Custom method to clear the adapter's data
+    public void clearData() {
+        arrLiveBus.clear();
+        notifyDataSetChanged();
     }
 }

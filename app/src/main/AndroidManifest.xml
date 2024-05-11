@@ -172,7 +172,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC0haBF8csfumcV-_7_lKnZ8bvm4urxc_s" />
+            android:value="AIzaSyCAuJOzKXlat5i1JIBscGuxOJKVfHHjP9Y" />
 
 <!--        <meta-data-->
 <!--            android:name="messageApi"-->

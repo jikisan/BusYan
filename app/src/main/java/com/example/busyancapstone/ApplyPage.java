@@ -330,7 +330,6 @@ public class ApplyPage extends AppCompatActivity {
             resumePicRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String resumeUrl = uri.toString();
 
-
                 licensePicRef.putFile(licenseUri).addOnSuccessListener( task1 -> {
                     licensePicRef.getDownloadUrl().addOnSuccessListener( uri1 -> {
                         String licenseUrl = uri1.toString();

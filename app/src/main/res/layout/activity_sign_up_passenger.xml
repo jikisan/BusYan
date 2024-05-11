@@ -71,6 +71,7 @@
         android:fontFamily="@font/poppins"
         android:hint="Password"
         android:padding="11dp"
+        android:inputType="textPassword"
         android:textColorHint="@color/black"
         android:textStyle="bold" />
 
@@ -85,6 +86,7 @@
         android:fontFamily="@font/poppins"
         android:hint="Confirm your password"
         android:padding="11dp"
+        android:inputType="textPassword"
         android:textColorHint="@color/black"
         android:textStyle="bold" />
 
