@@ -50,19 +50,20 @@ public class LoginPageBus extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
 
     int RC_SIGN_IN = 20;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page_bus);
 
 
-        busDriverDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_DRIVER.getValue());
+        busDriverDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.EMPLOYEES.getValue());
         //      google sign in
         googleAuth = findViewById(R.id.btn);
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        GoogleSignInOptions gso = new  GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.gcm_defaultSenderId)).requestEmail().build();
 
         googleAuth.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +79,7 @@ public class LoginPageBus extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
         // admin and admin
@@ -90,25 +91,24 @@ public class LoginPageBus extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 busDriverDb
-                .orderByChild("email")
-                .equalTo(email)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        .orderByChild("email")
+                        .equalTo(email)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        if(snapshot.exists()){
-                            signIn(email, password);
-                        }
-                        else{
-                            Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                                if (snapshot.exists()) {
+                                    signIn(email, password);
+                                } else {
+                                    Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError) + "Bus", Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
             }
         });
@@ -132,10 +132,10 @@ public class LoginPageBus extends AppCompatActivity {
 
     private void googleSignIn() {
         Intent intent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(intent,RC_SIGN_IN);
+        startActivityForResult(intent, RC_SIGN_IN);
     }
 
-    private void signIn(String email, String password){
+    private void signIn(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -148,9 +148,7 @@ public class LoginPageBus extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), BusStartingPage.class);
                             startActivity(intent);
 
-                        }
-
-                        else {
+                        } else {
                             // If sign in fails, display a message to the user.
 
                             Toast.makeText(LoginPageBus.this, "Login Failed!!",
@@ -161,11 +159,11 @@ public class LoginPageBus extends AppCompatActivity {
                 });
     }
 
-        @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
@@ -174,8 +172,7 @@ public class LoginPageBus extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account.getIdToken());
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -192,22 +189,21 @@ public class LoginPageBus extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     FirebaseUser user = auth.getCurrentUser();
 
-                    HashMap<String,Object> map = new HashMap<>();
-                    map.put("id",user.getUid());
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("id", user.getUid());
                     map.put("name", user.getDisplayName());
                     map.put("profile", user.getPhotoUrl());
 
                     database.getReference().child("users").child(user.getUid()).setValue(map);
 
-                    Intent intent = new Intent(LoginPageBus.this,BusStartingPage.class);
+                    Intent intent = new Intent(LoginPageBus.this, BusStartingPage.class);
                     startActivity(intent);
 
-                }
-                else {
+                } else {
 
                     Toast.makeText(LoginPageBus.this, "something went wrong", Toast.LENGTH_SHORT).show();
 

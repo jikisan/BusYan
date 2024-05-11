@@ -106,8 +106,8 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
 
     private void setLocationRequest() {
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(15000);
-        locationRequest.setFastestInterval(15000);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(5000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
     }

@@ -35,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/navbg"
         android:elevation="2dp"
-        app:menu="@menu/bottom_menu"
+        app:menu="@menu/passenger_menu"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"

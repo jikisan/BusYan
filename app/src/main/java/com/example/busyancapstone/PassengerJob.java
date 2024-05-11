@@ -89,6 +89,6 @@ public class PassengerJob extends AppCompatActivity {
         tv_search  = findViewById(R.id.tv_search);
         btn_busDriver  = findViewById(R.id.btn_busDriver);
         btn_busConductor  = findViewById(R.id.btn_busConductor);
-        iv_tempAddJobBtn  = findViewById(R.id.iv_tempAddJobBtn);
+
     }
 }

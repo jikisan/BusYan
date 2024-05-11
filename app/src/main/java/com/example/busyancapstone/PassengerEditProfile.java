@@ -54,6 +54,7 @@ public class PassengerEditProfile extends AppCompatActivity {
     private SwitchCompat sw_googleSwitch;
 
     private Uri cameraUri, imageUri;
+    private String currentImageUrl;
     private int x = 0;
     private static final int PERMISSION_REQUEST_CODE = 0;
 
@@ -96,28 +97,24 @@ public class PassengerEditProfile extends AppCompatActivity {
             public void onClick(View view) {
 
                 updateProfile();
-                Toast.makeText(PassengerEditProfile.this, "Profile Updated!!", Toast.LENGTH_SHORT).show();
 
             }
 
         });
 
-        ActivityResultLauncher<Intent> camera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
+        ActivityResultLauncher<Intent> camera = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
 
                 try {
-                    InputStream inputStream =getApplicationContext()
-                        .getContentResolver()
-                        .openInputStream(cameraUri);
+                    InputStream inputStream = getApplicationContext().getContentResolver().openInputStream(cameraUri);
                     Bitmap actualImage = BitmapFactory.decodeStream(inputStream);
 
                     imageUri = Helper.getImageUri(getApplicationContext(), actualImage);
                     Helper.loadImage(imageUri, iv_profilePic);
 
+                } catch (FileNotFoundException e) {
                 }
-                catch (FileNotFoundException e) {}
             }
         });
 
@@ -129,7 +126,7 @@ public class PassengerEditProfile extends AppCompatActivity {
 
     }
 
-    private void openCamera(ActivityResultLauncher<Intent> camera){
+    private void openCamera(ActivityResultLauncher<Intent> camera) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         ContentValues cv = new ContentValues();
         cv.put(MediaStore.Images.Media.DISPLAY_NAME, "Image" + x);
@@ -146,12 +143,14 @@ public class PassengerEditProfile extends AppCompatActivity {
         }
     }
 
-
     private void updateProfile() {
 
-        if(imageUri != null) {
-            FirebaseManager.setProfileImageUri(imageUri);
+        if (imageUri != null) {
+            System.out.println("no image");
             saveImageUrlToStorage(imageUri);
+        } else {
+            System.out.println("with image");
+            saveDataToDatabase(currentImageUrl);
         }
 
     }
@@ -160,10 +159,7 @@ public class PassengerEditProfile extends AppCompatActivity {
         String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         // Check if the permissions are granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             // Permissions already granted
             // You can perform your operations here
         } else {
@@ -178,8 +174,7 @@ public class PassengerEditProfile extends AppCompatActivity {
 
         if (requestCode == PERMISSION_REQUEST_CODE) {
             // Check if all permissions are granted
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 // Permissions granted, you can perform your operations here
             } else {
                 // Permissions denied
@@ -194,14 +189,15 @@ public class PassengerEditProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
 
                     Passenger passenger = snapshot.getValue(Passenger.class);
 
                     Helper.loadImage(FirebaseManager.getProfileImageUri(), iv_profilePic);
 
+                    currentImageUrl = passenger.getImageUrl();
                     Picasso.get()
-                            .load(passenger.getImageUrl())
+                            .load(currentImageUrl)
                             .placeholder(R.drawable.passengerpic)
                             .into(iv_profilePic);
 
@@ -209,8 +205,11 @@ public class PassengerEditProfile extends AppCompatActivity {
                     et_email.setText(passenger.getEmail());
                     et_mobileNum.setText(passenger.getPhoneNum());
 
-                    if(passenger.isGoogleConnected()) { sw_googleSwitch.setChecked(true);}
-                    else {sw_googleSwitch.setChecked(false); }
+                    if (passenger.isGoogleConnected()) {
+                        sw_googleSwitch.setChecked(true);
+                    } else {
+                        sw_googleSwitch.setChecked(false);
+                    }
 
                 }
 
@@ -223,7 +222,7 @@ public class PassengerEditProfile extends AppCompatActivity {
         });
     }
 
-    private void reference(){
+    private void reference() {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         update = (MaterialButton) findViewById(R.id.update);
@@ -239,7 +238,7 @@ public class PassengerEditProfile extends AppCompatActivity {
 
     }
 
-    private void saveImageUrlToStorage(Uri photoUri){
+    private void saveImageUrlToStorage(Uri photoUri) {
 
 
         passengerStorage = FirebaseStorage.getInstance().getReference(FirebaseReferences.PASSENGER.getValue());
@@ -260,7 +259,7 @@ public class PassengerEditProfile extends AppCompatActivity {
 
     }
 
-    private void saveDataToDatabase(String imageUrl){
+    private void saveDataToDatabase(String imageUrl) {
 
         String fullName = et_fullName.getText().toString();
         String phoneNum = et_mobileNum.getText().toString();
@@ -270,10 +269,18 @@ public class PassengerEditProfile extends AppCompatActivity {
         newData.put("phoneNum", phoneNum);
         newData.put("imageUrl", imageUrl);
 
-        FirebaseManager.updateData(passengerDb, MY_USER_ID, newData);
+        passengerDb.child(MY_USER_ID).updateChildren(newData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                new Helper(PassengerEditProfile.this).showToastLong("Profile updated ddd");
+                startActivity(new Intent(PassengerEditProfile.this, PassengerProfile.class));
 
-        new Helper(this).showToastLong("Profile updated");
-        startActivity(new Intent(this, PassengerProfile.class));
+            }
+        });
+
+//        FirebaseManager.setProfileImageUri(imageUri, fullName);
+//        FirebaseManager.updateData(passengerDb, MY_USER_ID, newData);
+
     }
 
 }

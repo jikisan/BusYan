@@ -70,7 +70,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        String dbName = FirebaseReferences.BUS_DRIVER.getValue();
+        String dbName = FirebaseReferences.EMPLOYEES.getValue();
         busDriverDb = FirebaseDatabase.getInstance().getReference(dbName);
 
         reference();
@@ -162,7 +162,7 @@ public class Profile extends AppCompatActivity {
     private void updateProfile() {
 
         if(imageUri != null) {
-            FirebaseManager.setProfileImageUri(imageUri);
+
             saveImageUrlToStorage(imageUri);
         }
 
@@ -289,6 +289,7 @@ public class Profile extends AppCompatActivity {
         newData.put("phoneNum", phoneNum);
         newData.put("imageUrl", imageUrl);
 
+        FirebaseManager.setProfileImageUri(imageUri, fullName);
         FirebaseManager.updateData(busDriverDb, MY_USER_ID, newData);
 
         new Helper(this).showToastLong("Profile updated");
