@@ -74,6 +74,8 @@
                 android:fontFamily="@font/poppins"
                 android:layout_below="@+id/iv_profilePic"
                 android:hint="Full Name"
+                android:enabled="false"
+                android:visibility="visible"
                 android:padding="11dp"
                 android:textStyle="bold" />
 
@@ -87,6 +89,8 @@
                 android:background="@drawable/round"
                 android:backgroundTint="@color/figma6"
                 android:fontFamily="@font/poppins"
+                android:enabled="false"
+                android:visibility="visible"
                 android:hint="Bus Code"
                 android:padding="11dp"
                 android:textStyle="bold" />
@@ -102,6 +106,8 @@
                 android:backgroundTint="@color/figma6"
                 android:fontFamily="@font/poppins"
                 android:hint="Route"
+                android:enabled="false"
+                android:visibility="visible"
                 android:padding="11dp"
                 android:textStyle="bold" />
 
@@ -116,6 +122,8 @@
                 android:backgroundTint="@color/figma6"
                 android:fontFamily="@font/poppins"
                 android:hint="PITAM"
+                android:enabled="false"
+                android:visibility="visible"
                 android:padding="11dp"
                 android:textColorHint="@color/black"
                 android:textStyle="bold" />
@@ -131,6 +139,7 @@
                 android:backgroundTint="@color/figma6"
                 android:fontFamily="@font/poppins"
                 android:hint="Email Address"
+                android:visibility="gone"
                 android:padding="11dp"
                 android:textStyle="bold" />
 
@@ -146,6 +155,7 @@
                 android:drawableLeft="@drawable/phflag"
                 android:fontFamily="@font/poppins"
                 android:hint="Mobile Number"
+                android:visibility="gone"
                 android:padding="11dp"
                 android:textStyle="bold" />
 
@@ -166,7 +176,8 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Linked Accounts"
-                android:textColor="#A6000000" />
+                android:textColor="#A6000000"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/linkgo"
@@ -176,7 +187,8 @@
                 android:layout_marginLeft="65dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Google" />
+                android:text="Google"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/googlel"
@@ -184,7 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/link"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/google" />
+                android:src="@drawable/google"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/linkfb"
@@ -194,7 +207,8 @@
                 android:layout_marginLeft="65dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Facebook" />
+                android:text="Facebook"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/facebookl"
@@ -202,7 +216,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/googlel"
                 android:layout_marginLeft="21dp"
-                android:src="@drawable/facebook1" />
+                android:src="@drawable/facebook1"
+                android:visibility="gone"/>
 
 
             <androidx.appcompat.widget.SwitchCompat
@@ -213,7 +228,8 @@
                 android:layout_marginLeft="330dp"
                 android:clickable="false"
                 android:thumb="@drawable/toggle_on_off"
-                app:track="@drawable/track" />
+                app:track="@drawable/track"
+                android:visibility="gone"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sw_fbSwitch"
@@ -224,7 +240,8 @@
                 android:layout_marginTop="-15dp"
                 android:clickable="false"
                 android:thumb="@drawable/toggle_on_off"
-                app:track="@drawable/track" />
+                app:track="@drawable/track"
+                android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/update"
@@ -232,7 +249,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@id/facebookl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="50dp"
                 android:backgroundTint="@color/figma"
                 android:fontFamily="@font/poppins"
                 android:text="Update Profile"

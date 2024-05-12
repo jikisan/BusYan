@@ -53,7 +53,6 @@ public class Profile extends AppCompatActivity {
     private SwitchCompat sw_googleSwitch, sw_fbSwitch;
     private ImageView iv_profilePic, iv_uploadPhotoBtn;
 
-
     private final String MY_USER_ID = FirebaseManager.getMyUserId();
     private BusDriver busDriver;
 
@@ -106,10 +105,9 @@ public class Profile extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
 
             if (item.getItemId() == R.id.bottom_profile) {
-
                 return true;
             } else if (item.getItemId() == R.id.bottom_home) {
-                startActivity(new Intent(getApplicationContext(), BusActivity.class));
+                startActivity(new Intent(getApplicationContext(), BusStartingPage.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
@@ -119,6 +117,7 @@ public class Profile extends AppCompatActivity {
                 finish();
                 return true;
             }
+
             return false;
         });
 

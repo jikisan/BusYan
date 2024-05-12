@@ -13,6 +13,7 @@ import com.google.android.material.button.MaterialButton;
 public class ProfileMenu extends AppCompatActivity {
     private MaterialButton editpro;
     private TextView logout, Help, aboutus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,6 @@ public class ProfileMenu extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.bottom_profile) {
-
                 return true;
             } else if (item.getItemId() == R.id.bottom_home) {
                 startActivity(new Intent(getApplicationContext(), BusStartingPage.class));
@@ -43,14 +43,14 @@ public class ProfileMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ProfileMenu.this,Profile.class);
+                Intent intent = new Intent(ProfileMenu.this, Profile.class);
                 startActivity(intent);
 
             }
         });
 
         //logout
-        TextView logout  = findViewById(R.id.logout);
+        TextView logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,7 @@ public class ProfileMenu extends AppCompatActivity {
 
         //about us
 
-        TextView aboutus  = findViewById(R.id.aboutus);
+        TextView aboutus = findViewById(R.id.aboutus);
         aboutus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +84,7 @@ public class ProfileMenu extends AppCompatActivity {
 
 
         // help center
-        TextView Help  = findViewById(R.id.Help);
+        TextView Help = findViewById(R.id.Help);
         Help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

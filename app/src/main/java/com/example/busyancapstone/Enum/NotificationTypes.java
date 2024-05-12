@@ -6,6 +6,8 @@ public enum NotificationTypes {
     RESERVATIONS_ACCEPTED,
     RESERVATIONS_CANCEL,
     RESERVATIONS_FULL,
+    APPLICATION_UPDATE,
+    BUS_SCHEDULE,
     JOBS
 
 }
