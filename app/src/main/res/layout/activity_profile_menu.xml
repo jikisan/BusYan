@@ -7,48 +7,48 @@
     tools:context=".ProfileMenu">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/eclipseprofile"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="1dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="25dp"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/iconprofile"
-        android:layout_marginTop="48dp"
-        android:layout_marginLeft="35dp"/>
 
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="David Brigoli"
+        android:layout_alignTop="@+id/iv_profilePic"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="125dp"
+        android:layout_toEndOf="@+id/iv_profilePic"
         android:fontFamily="@font/poppins_bold"
-        android:layout_marginTop="55dp"
-        android:textSize="17dp"
-        android:layout_marginLeft="125dp"/>
+        android:text="David Brigoli"
+        android:textSize="17dp" />
 
     <TextView
+        android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="davidbrigoli@gmail.com"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignStart="@+id/tv_name"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="79dp"
-        android:layout_marginLeft="125dp"/>
+        android:text="davidbrigoli@gmail.com" />
 
     <com.google.android.material.button.MaterialButton
-    android:id="@+id/editpro"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="110dp"
-    android:layout_marginLeft="130dp"
-    android:backgroundTint="@color/navbackground"
-    android:fontFamily="@font/poppins"
-    android:text="Edit Profile"
-    android:textColor="@color/black"
-    android:textStyle="bold"/>
+        android:id="@+id/editpro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_email"
+        android:layout_alignStart="@+id/tv_email"
+        android:backgroundTint="@color/navbackground"
+        android:fontFamily="@font/poppins"
+        android:text="Edit Profile"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/general"

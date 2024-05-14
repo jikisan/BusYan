@@ -63,8 +63,7 @@ public class LoginPageBus extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.gcm_defaultSenderId)).requestEmail().build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.gcm_defaultSenderId)).requestEmail().build();
 
         googleAuth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,25 +89,22 @@ public class LoginPageBus extends AppCompatActivity {
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
 
-                busDriverDb
-                        .orderByChild("email")
-                        .equalTo(email)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                busDriverDb.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                if (snapshot.exists()) {
-                                    signIn(email, password);
-                                } else {
-                                    Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError) + "Bus", Toast.LENGTH_SHORT).show();
-                                }
-                            }
+                        if (snapshot.exists()) {
+                            signIn(email, password);
+                        } else {
+                            Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError) + "Bus", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(LoginPageBus.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
@@ -137,26 +133,23 @@ public class LoginPageBus extends AppCompatActivity {
 
     private void signIn(String email, String password) {
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginPageBus.this, "Successfully login",
-                                    Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), BusStartingPage.class);
-                            startActivity(intent);
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Toast.makeText(LoginPageBus.this, "Successfully login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), BusStartingPage.class);
+                    startActivity(intent);
 
-                        } else {
-                            // If sign in fails, display a message to the user.
+                } else {
+                    // If sign in fails, display a message to the user.
 
-                            Toast.makeText(LoginPageBus.this, "Login Failed!!",
-                                    Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPageBus.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
 
-                        }
-                    }
-                });
+                }
+            }
+        });
     }
 
     @Override

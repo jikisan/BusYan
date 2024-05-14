@@ -67,8 +67,6 @@ public class LoginPage extends AppCompatActivity {
         references();
         clickActions();
 
-
-
     }
 
     private void clickActions() {
@@ -95,10 +93,9 @@ public class LoginPage extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                if(snapshot.exists()){
+                                if (snapshot.exists()) {
                                     regularSignIn(email, password);
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(LoginPage.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -146,7 +143,7 @@ public class LoginPage extends AppCompatActivity {
     private void googleSignIn() {
 
         Log.d(TAG, "googleSignIn: ");
-        GoogleSignInOptions gso = new  GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -155,11 +152,11 @@ public class LoginPage extends AppCompatActivity {
 
 
         Intent intent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(intent,RC_SIGN_IN);
+        startActivityForResult(intent, RC_SIGN_IN);
 
     }
 
-    private void regularSignIn(String email, String password){
+    private void regularSignIn(String email, String password) {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -173,11 +170,9 @@ public class LoginPage extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), PassengerActivity.class);
                             startActivity(intent);
 
-                        }
-
-                        else {
+                        } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginPage.this, "Login Failed!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginPage.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -190,7 +185,7 @@ public class LoginPage extends AppCompatActivity {
 
         Log.d(TAG, "onActivityResult: ");
 
-        if (requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
 
             Log.d(TAG, "requestCode: " + RC_SIGN_IN);
 
@@ -200,8 +195,7 @@ public class LoginPage extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account);
 
-            }
-            catch (ApiException e) {
+            } catch (ApiException e) {
                 Log.d(TAG, "Exception requestCode: " + RC_SIGN_IN);
                 Log.d(TAG, "Exception onActivityResult: " + e);
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -212,7 +206,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private void firebaseAuth(GoogleSignInAccount account ) {
+    private void firebaseAuth(GoogleSignInAccount account) {
 
         Log.d(TAG, "firebaseAuth: ");
 
@@ -222,7 +216,7 @@ public class LoginPage extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 Log.d(TAG, "signInWithCredential: Complete!");
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     Log.d(TAG, "signInWithCredential: Success!");
                     FirebaseUser user = mAuth.getCurrentUser();
@@ -238,11 +232,10 @@ public class LoginPage extends AppCompatActivity {
 
                     FirebaseManager.addData(passengerDb, passenger, user.getUid());
 
-                    Intent intent = new Intent(LoginPage.this,PassengerActivity.class);
+                    Intent intent = new Intent(LoginPage.this, PassengerActivity.class);
                     startActivity(intent);
 
-                }
-                else {
+                } else {
 
                     Toast.makeText(LoginPage.this, "something went wrong", Toast.LENGTH_SHORT).show();
 
@@ -257,7 +250,7 @@ public class LoginPage extends AppCompatActivity {
 
         googlBtn = findViewById(R.id.btn);
         database = FirebaseDatabase.getInstance();
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
         signup = findViewById(R.id.signup);
