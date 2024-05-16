@@ -272,6 +272,8 @@ public class Profile extends AppCompatActivity {
                     et_fullName.setText(emp.getFullName());
                     et_busCode.setText(busCode);
                     et_route.setText(route);
+                    et_email.setText(emp.getEmail());
+                    et_mobileNum.setText(emp.getPhoneNum());
                 }
             }
 

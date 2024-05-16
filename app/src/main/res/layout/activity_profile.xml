@@ -139,7 +139,8 @@
                 android:backgroundTint="@color/figma6"
                 android:fontFamily="@font/poppins"
                 android:hint="Email Address"
-                android:visibility="gone"
+                android:visibility="visible"
+                android:enabled="false"
                 android:padding="11dp"
                 android:textStyle="bold" />
 
@@ -155,7 +156,8 @@
                 android:drawableLeft="@drawable/phflag"
                 android:fontFamily="@font/poppins"
                 android:hint="Mobile Number"
-                android:visibility="gone"
+                android:visibility="visible"
+                android:enabled="false"
                 android:padding="11dp"
                 android:textStyle="bold" />
 

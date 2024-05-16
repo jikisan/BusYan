@@ -60,19 +60,19 @@ public class AddJob extends AppCompatActivity {
         String salary = et_salary.getText().toString();
         String postDate = et_postDate.getText().toString();
 
-        Job job = new Job(
-                title,
-                company,
-                desc,
-                jobType,
-                loc,
-                salary,
-                postDate
-        );
-
-
-
-        FirebaseManager.addData(jobDb, job);
+//        Job job = new Job(
+//                title,
+//                company,
+//                desc,
+//                jobType,
+//                loc,
+//                salary,
+//                postDate
+//        );
+//
+//
+//
+//        FirebaseManager.addData(jobDb, job);
         Toast.makeText(this, "Job Created!", Toast.LENGTH_SHORT).show();
     }
 

@@ -23,6 +23,9 @@
         android:theme="@style/Theme.BusYanCapstone"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryPage"
+            android:exported="false" />
+        <activity
             android:name=".AddJob"
             android:exported="false" />
         <activity
@@ -166,18 +169,10 @@
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <!-- AndroidManifest.xml -->
-
+            android:resource="@array/preloaded_fonts" /> <!-- AndroidManifest.xml -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCAuJOzKXlat5i1JIBscGuxOJKVfHHjP9Y" />
-
-<!--        <meta-data-->
-<!--            android:name="messageApi"-->
-<!--            android:value="Njg0ZTUwMzg0YTY1NzU3NzU4NjI2ZjUyNTUzNzUwMzI=" />-->
-
     </application>
 
 </manifest>

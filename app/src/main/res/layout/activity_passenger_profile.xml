@@ -77,16 +77,36 @@
 
     <TextView
         android:id="@+id/saved"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Saved                                                                              "
+        android:layout_alignStart="@+id/passline"
+        android:layout_alignTop="@+id/passline"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:clickable="true"
         android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="20dp"
+        android:text="Saved"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/saved"
+        android:layout_alignStart="@+id/saved"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="25dp"
-        android:textSize="16dp"
-        android:layout_below="@id/myaccount"
-        android:clickable="true"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:clickable="true"
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:text="History"
+        android:textSize="16dp" />
+
+
 
 
 
@@ -103,9 +123,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General"
-        android:layout_below="@+id/passline"
+        android:layout_below="@+id/history"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="-35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
         android:textSize="16dp"
         android:textStyle="bold"/>
@@ -151,11 +171,12 @@
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="380dp"
         android:layout_height="300dp"
-        android:src="@drawable/line3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp"/>
+        android:layout_marginTop="280dp"
+        android:src="@drawable/line3" />
 
 
 

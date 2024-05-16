@@ -41,7 +41,7 @@ public class PassengerProfile extends AppCompatActivity {
         tv_email = findViewById(R.id.tv_email);
         tv_name = findViewById(R.id.tv_name);
         iv_profilePic = findViewById(R.id.iv_profilePic);
-        
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.passenger_profile);
 
@@ -73,6 +73,12 @@ public class PassengerProfile extends AppCompatActivity {
             }
         });
 
+
+        TextView history = findViewById(R.id.history);
+        history.setOnClickListener(v -> {
+            Intent intent = new Intent(PassengerProfile.this, HistoryPage.class);
+            startActivity(intent);
+        });
 
         //saved
         TextView saved = findViewById(R.id.saved);
