@@ -35,12 +35,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.busyancapstone.Enum.FirebaseReferences;
+import com.example.busyancapstone.Enum.NotificationTypes;
 import com.example.busyancapstone.Helper.Helper;
 import com.example.busyancapstone.Manager.FirebaseManager;
 import com.example.busyancapstone.Manager.MapsManager;
 import com.example.busyancapstone.Model.Application;
 import com.example.busyancapstone.Model.Job;
+import com.example.busyancapstone.Model.Notifications;
 import com.example.busyancapstone.Model.Passenger;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -359,7 +362,6 @@ public class ApplyPage extends AppCompatActivity {
 
     private void saveDataToDatabase(String profileUrl, String resumeUrl, String licenseUrl, String question1, String question2, String workExperience, String educationalAttainment, String address){
 
-
         Application application = new Application(
                 MY_USER_ID,
                 jobId,
@@ -379,6 +381,24 @@ public class ApplyPage extends AppCompatActivity {
         );
 
         FirebaseManager.addData(applicationDb, application);
+
+//        applicationDb.push().setValue(application).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void unused) {
+//                Notifications notifications = new Notifications(
+//                        liveBus.getBusDriverId(),
+//                        relatedNodeId,
+//                        getResources().getString(R.string.seatReservationTitle),
+//                        getResources().getString(R.string.seatReservationMessage),
+//                        Helper.getCurrentDate(),
+//                        NotificationTypes.SUBMITTED_APPLICATION
+//                );
+//
+//
+//                FirebaseManager.addData(notificationDb, notifications);
+//            }
+//        });
+
 
         circleProgressBar.setVisibility(View.GONE);
         new Helper(this).showToastLong("Application Sent!");

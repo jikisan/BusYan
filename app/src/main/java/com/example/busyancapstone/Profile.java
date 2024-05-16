@@ -28,7 +28,10 @@ import android.widget.Toast;
 import com.example.busyancapstone.Enum.FirebaseReferences;
 import com.example.busyancapstone.Helper.Helper;
 import com.example.busyancapstone.Manager.FirebaseManager;
+import com.example.busyancapstone.Model.BusDetails;
 import com.example.busyancapstone.Model.BusDriver;
+import com.example.busyancapstone.Model.BusSchedules;
+import com.example.busyancapstone.Model.Employee;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
@@ -36,6 +39,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -54,13 +58,12 @@ public class Profile extends AppCompatActivity {
     private ImageView iv_profilePic, iv_uploadPhotoBtn;
 
     private final String MY_USER_ID = FirebaseManager.getMyUserId();
-    private BusDriver busDriver;
 
     private Uri cameraUri, imageUri;
     private int x = 0;
     private static final int PERMISSION_REQUEST_CODE = 0;
 
-    private DatabaseReference busDriverDb;
+    private DatabaseReference empDb, busSched, busDetails;
     private StorageReference busDriverStorage;
     private static final int USER_PIC = 3;
 
@@ -69,8 +72,10 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        String dbName = FirebaseReferences.EMPLOYEES.getValue();
-        busDriverDb = FirebaseDatabase.getInstance().getReference(dbName);
+        empDb = FirebaseDatabase.getInstance().getReference( FirebaseReferences.EMPLOYEES.getValue());
+        busSched = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_SCHED.getValue());
+        busDetails = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_DETAILS.getValue());
+
 
         reference();
         requestPermissions();
@@ -127,10 +132,7 @@ public class Profile extends AppCompatActivity {
 
                 updateProfile();
                 Toast.makeText(Profile.this, "Profile Updated!!", Toast.LENGTH_SHORT).show();
-
             }
-
-
         });
 
         iv_uploadPhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -199,38 +201,80 @@ public class Profile extends AppCompatActivity {
         }
     }
 
+
+
     private void getData() {
 
-        busDriverDb.child(MY_USER_ID).addListenerForSingleValueEvent(new ValueEventListener() {
+        empDb.child(MY_USER_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if(snapshot.exists()){
 
-                    busDriver = snapshot.getValue(BusDriver.class);
+                    Employee emp = snapshot.getValue(Employee.class);
 
-                    Helper.loadImage(FirebaseManager.getProfileImageUri(), iv_profilePic);
-
-                    Picasso.get()
-                            .load(busDriver.getImageUrl())
-                            .placeholder(R.drawable.iconprofile)
-                            .into(iv_profilePic);
-
-                    et_fullName.setText(busDriver.getFullName());
-                    et_busCode.setText(busDriver.getBusCode());
-                    et_route.setText(busDriver.getRoute());
-                    et_email.setText(busDriver.getEmail());
-                    et_mobileNum.setText(busDriver.getPhoneNum());
-
-                    if(busDriver.isGoogleConnected()) { sw_googleSwitch.setChecked(true); }
-                    else {sw_googleSwitch.setChecked(false); }
-
-                    if(busDriver.isFacebookConnected()) { sw_fbSwitch.setChecked(true); }
-                    else {sw_googleSwitch.setChecked(false); }
-
+                    getDriverData(emp);
                 }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getDriverData(Employee emp) {
+
+        Query query = busSched.orderByChild("busDriver").equalTo(MY_USER_ID);
+        System.out.println("MY_USER_ID: " + MY_USER_ID);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                System.out.println("success");
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    BusSchedules busSched = dataSnapshot.getValue(BusSchedules.class);
+
+                    getBusDetails(busSched.getBus(), emp);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getBusDetails(String busId, Employee emp) {
+
+        busDetails.child(busId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+
+                    BusDetails busDetails = snapshot.getValue(BusDetails.class);
+
+                    String busCode = busDetails.getBusCode();
+                    String route = busDetails.getStartPoint() + " - " + busDetails.getEndPoint();
+                    String plateNum = busDetails.getPlateNumber();
+
+                    Picasso.get()
+                            .load(emp.getImageUrl())
+                            .placeholder(R.drawable.iconprofile)
+                            .into(iv_profilePic);
+
+                    et_fullName.setText(emp.getFullName());
+                    et_busCode.setText(busCode);
+                    et_route.setText(route);
+                }
+            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -284,12 +328,10 @@ public class Profile extends AppCompatActivity {
         String phoneNum = et_mobileNum.getText().toString();
 
         HashMap<String, Object> newData = new HashMap<>();
-        newData.put("fullName", fullName);
-        newData.put("phoneNum", phoneNum);
         newData.put("imageUrl", imageUrl);
 
         FirebaseManager.setProfileImageUri(imageUri, fullName);
-        FirebaseManager.updateData(busDriverDb, MY_USER_ID, newData);
+        FirebaseManager.updateData(empDb, MY_USER_ID, newData);
 
         new Helper(this).showToastLong("Profile updated");
         startActivity(new Intent(this, ProfileMenu.class));

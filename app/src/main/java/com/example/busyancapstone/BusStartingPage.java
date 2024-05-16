@@ -27,6 +27,7 @@ import com.example.busyancapstone.Enum.FirebaseReferences;
 import com.example.busyancapstone.Helper.Helper;
 import com.example.busyancapstone.Manager.FirebaseManager;
 import com.example.busyancapstone.Manager.MapsManager;
+import com.example.busyancapstone.Model.BusDetails;
 import com.example.busyancapstone.Model.BusDriver;
 import com.example.busyancapstone.Model.BusSchedules;
 import com.example.busyancapstone.Model.LiveDrivers;
@@ -80,13 +81,13 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
     private FusedLocationProviderClient client;
     private double lattitude = 0.0, longitude = 0.0;
     private boolean isPassengerUpdatesRunning = false;
-    private String apiKey, busCode, route, plateNum;
+    private String apiKey, busCode, route, plateNum, driverName, companyName;
 
     private final String My_USER_ID = FirebaseManager.getMyUserId();
     private ArrayList<LivePassengers> arrLivePassengers = new ArrayList<>();
     private ArrayList<Marker> passengerMarkers = new ArrayList<>();
 
-    private DatabaseReference liveDriversDb, busSched, livePassengerDb, revisionRequestDb;
+    private DatabaseReference liveDriversDb, busSched, busDetails, livePassengerDb, revisionRequestDb;
 
 
     @Override
@@ -95,6 +96,7 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
         setContentView(R.layout.activity_bus_starting_page);
 
         busSched = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_SCHED.getValue());
+        busDetails = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_DETAILS.getValue());
         liveDriversDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.LIVE_DRIVERS.getValue());
         livePassengerDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.LIVE_PASSENGERS.getValue());
         revisionRequestDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.REVISION_REQUEST.getValue());
@@ -182,13 +184,37 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     BusSchedules busSched = dataSnapshot.getValue(BusSchedules.class);
-                    busCode = busSched.getBus();
-                    route = busSched.getRouteNo();
-//                    plateNum = busSched.getPlateNumber();
+                    driverName = busSched.getDriverFullname();
+                    companyName = busSched.getCompanyName();
+                    getBusDetails(busSched.getBus());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getBusDetails(String busId) {
+
+        busDetails.child(busId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+
+                    BusDetails busDetails = snapshot.getValue(BusDetails.class);
+
+                    busCode = busDetails.getBusCode();
+                    route = busDetails.getStartPoint() + " - " + busDetails.getEndPoint();
+                    plateNum = busDetails.getPlateNumber();
 
                     busCodeButton.setText(busCode);
                     setRouteButton.setText(route);
                     plateEditText.setText(plateNum);
+
                 }
             }
 
@@ -205,6 +231,14 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
         builder.setMessage("Confirm Yes if your Bus details are accurate. If No, ask your bus operator to make revision and edits")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
+                        RevisionRequest request = new RevisionRequest(
+                                companyName,
+                                Helper.getCurrentDate(),
+                                driverName + " confirms the accuracy of its bus details."
+                        );
+
+                        FirebaseManager.addData(revisionRequestDb, request);
 
                         dialog.dismiss();
                     }
@@ -229,9 +263,9 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
     private void createRevisionRequest() {
 
         RevisionRequest request = new RevisionRequest(
-                My_USER_ID,
+                companyName,
                 Helper.getCurrentDate(),
-                ""
+                driverName + " disagree the accuracy of its bus details. Check to modify any changes."
         );
 
         FirebaseManager.addData(revisionRequestDb, request);

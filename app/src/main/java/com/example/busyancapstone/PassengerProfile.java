@@ -47,7 +47,6 @@ public class PassengerProfile extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.passenger_profile) {
-
                 return true;
             } else if (item.getItemId() == R.id.passenger_home) {
                 startActivity(new Intent(getApplicationContext(), PassengerActivity.class));
