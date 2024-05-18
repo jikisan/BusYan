@@ -15,11 +15,12 @@ public class BusSchedules {
     private String busOperatorId;
     private String companyName;
     private String companyId;
+    private boolean isApproved;
 
     public BusSchedules() {
     }
 
-    public BusSchedules(String bus, String busDriver, String conductor, String startDate, String endDate, String startTime, String endTime, String routeNo, String driverFullname, String conductorFullname, String datetimeAdded, String busOperatorId, String companyName, String companyId) {
+    public BusSchedules(String bus, String busDriver, String conductor, String startDate, String endDate, String startTime, String endTime, String routeNo, String driverFullname, String conductorFullname, String datetimeAdded, String busOperatorId, String companyName, String companyId, boolean isApproved) {
         this.bus = bus;
         this.busDriver = busDriver;
         this.conductor = conductor;
@@ -34,6 +35,11 @@ public class BusSchedules {
         this.busOperatorId = busOperatorId;
         this.companyName = companyName;
         this.companyId = companyId;
+        this.isApproved = isApproved;
+    }
+
+    public boolean getIsApproved() {
+        return isApproved;
     }
 
     public String getBus() {

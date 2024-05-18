@@ -52,10 +52,14 @@ public class NotificationActivity extends AppCompatActivity {
         notifListView.setAdapter(customAdapterNotif);
 
         generateNotif();
+        customAdapterNotif.notifyDataSetChanged();
+
 
     }
 
     private void generateNotif() {
+
+        System.out.println("MY_USER_ID: " + MY_USER_ID);
 
         Query query = notifDb.orderByChild("targetUserId").equalTo(MY_USER_ID);
         query.addValueEventListener(new ValueEventListener() {

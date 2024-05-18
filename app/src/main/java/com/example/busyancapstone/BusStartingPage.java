@@ -63,6 +63,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BusStartingPage extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -227,37 +229,64 @@ public class BusStartingPage extends AppCompatActivity implements OnMapReadyCall
     }
 
     private void showConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Confirm Yes if your Bus details are accurate. If No, ask your bus operator to make revision and edits")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-                        RevisionRequest request = new RevisionRequest(
-                                companyName,
-                                Helper.getCurrentDate(),
-                                driverName + " confirms the accuracy of its bus details."
-                        );
+        Query query = busSched.orderByChild("busDriver").equalTo(My_USER_ID);
 
-                        FirebaseManager.addData(revisionRequestDb, request);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        dialog.dismiss();
+                    BusSchedules busSchedules = snapshot.getValue(BusSchedules.class);
+
+                    if (!busSchedules.getIsApproved()) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(BusStartingPage.this);
+                        builder.setMessage("Confirm Yes if your Bus details are accurate. If No, ask your bus operator to make revision and edits")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        Map<String, Object> childUpdates = new HashMap<>();
+                                        childUpdates.put("isApproved", true);
+                                        snapshot.getRef().updateChildren(childUpdates);
+
+                                        RevisionRequest request = new RevisionRequest(
+                                                companyName,
+                                                Helper.getCurrentDate(),
+                                                driverName + " confirms the accuracy of its bus details."
+                                        );
+
+                                        FirebaseManager.addData(revisionRequestDb, request);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        Toast.makeText(BusStartingPage.this, "Revision request has been sent to the operator", Toast.LENGTH_LONG).show();
+                                        createRevisionRequest();
+                                        startActivity(new Intent(BusStartingPage.this, MainActivity.class));
+                                        dialog.dismiss();
+                                    }
+
+
+                                });
+
+                        // Create and show the AlertDialog
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-                        Toast.makeText(BusStartingPage.this, "Revision request has been sent to the operator", Toast.LENGTH_LONG).show();
-                        createRevisionRequest();
-                        startActivity(new Intent(BusStartingPage.this, MainActivity.class));
-                        dialog.dismiss();
-                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
 
 
-                });
 
-        // Create and show the AlertDialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     private void createRevisionRequest() {

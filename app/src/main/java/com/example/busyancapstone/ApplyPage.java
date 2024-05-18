@@ -77,7 +77,7 @@ public class ApplyPage extends AppCompatActivity {
     private LinearLayout layoutQuestion, layoutResume, layoutExperience, layoutEducation, layoutAddress, layoutLicense;
     private CardView cardQuestion, cardResume, cardExperience, cardEducation, cardAddress, cardLicense;
     private ImageView ivResume, ivLicense, iv_profilePic, iv_uploadPhotoBtn;
-    private EditText etQuestion1, etQuestion2, etEducationalAttainment;
+    private EditText etEducationalAttainment;
     private Button submit, btnUploadFile, btnUploadLicense, clickedButton;
     private BottomNavigationView bottomNavigationView;
     private ProgressBar circleProgressBar;
@@ -171,7 +171,7 @@ public class ApplyPage extends AppCompatActivity {
         cardQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleVisibility(layoutQuestion);
+//                toggleVisibility(layoutQuestion);
             }
         });
 
@@ -305,20 +305,18 @@ public class ApplyPage extends AppCompatActivity {
 
     private void submitApplication() {
 
-        String question1 = etQuestion1.getText().toString().trim();
-        String question2 = etQuestion2.getText().toString().trim();
         String workExperience = tv_workExperience.getText().toString().trim();
         String educationalAttainment = etEducationalAttainment.getText().toString().trim();
         String address = tvAddress.getText().toString().trim();
 
-        if (!areFieldsValid(question1, question2, workExperience, educationalAttainment, address)) {
+        if (!areFieldsValid(workExperience, educationalAttainment, address)) {
             Toast.makeText(getApplicationContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
         }
         else {
             Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
             circleProgressBar.setVisibility(View.VISIBLE);
 
-            saveDataInDb(question1, question2, workExperience, educationalAttainment, address);
+            saveDataInDb("", "", workExperience, educationalAttainment, address);
         }
     }
 
@@ -538,8 +536,6 @@ public class ApplyPage extends AppCompatActivity {
         cardQuestion = findViewById(R.id.card_question);
 
         layoutQuestion = findViewById(R.id.layout_question);
-        etQuestion1 = findViewById(R.id.et_question1);
-        etQuestion2 = findViewById(R.id.et_question2);
 
         cardResume = findViewById(R.id.card_resume);
 
