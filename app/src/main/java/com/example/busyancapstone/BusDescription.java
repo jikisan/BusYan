@@ -104,7 +104,7 @@ public class BusDescription extends AppCompatActivity {
                     Job job = snapshot.getValue(Job.class);
 
                     tvTitle.setText(job.getTitle());
-                    tvCompany.setText(job.getCompany());
+                    tvCompany.setText(job.getCompanyName());
                     tvLocation.setText(job.getLocation());
                     tvSalary.setText(job.getSalary());
                     tvPostDate.setText(job.getPostDate());

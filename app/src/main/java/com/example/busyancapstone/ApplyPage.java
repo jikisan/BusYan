@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,12 +35,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.busyancapstone.Enum.FirebaseReferences;
+import com.example.busyancapstone.Enum.NotificationTypes;
 import com.example.busyancapstone.Helper.Helper;
 import com.example.busyancapstone.Manager.FirebaseManager;
 import com.example.busyancapstone.Manager.MapsManager;
 import com.example.busyancapstone.Model.Application;
 import com.example.busyancapstone.Model.Job;
+import com.example.busyancapstone.Model.Notifications;
 import com.example.busyancapstone.Model.Passenger;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -73,9 +77,10 @@ public class ApplyPage extends AppCompatActivity {
     private LinearLayout layoutQuestion, layoutResume, layoutExperience, layoutEducation, layoutAddress, layoutLicense;
     private CardView cardQuestion, cardResume, cardExperience, cardEducation, cardAddress, cardLicense;
     private ImageView ivResume, ivLicense, iv_profilePic, iv_uploadPhotoBtn;
-    private EditText etQuestion1, etQuestion2, etEducationalAttainment;
+    private EditText etEducationalAttainment;
     private Button submit, btnUploadFile, btnUploadLicense, clickedButton;
     private BottomNavigationView bottomNavigationView;
+    private ProgressBar circleProgressBar;
 
     private Double lattitude, longitude;
     private Uri resumeUri, licenseUri, cameraUri;
@@ -166,7 +171,7 @@ public class ApplyPage extends AppCompatActivity {
         cardQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggleVisibility(layoutQuestion);
+//                toggleVisibility(layoutQuestion);
             }
         });
 
@@ -299,18 +304,19 @@ public class ApplyPage extends AppCompatActivity {
     }
 
     private void submitApplication() {
-        String question1 = etQuestion1.getText().toString().trim();
-        String question2 = etQuestion2.getText().toString().trim();
+
         String workExperience = tv_workExperience.getText().toString().trim();
         String educationalAttainment = etEducationalAttainment.getText().toString().trim();
         String address = tvAddress.getText().toString().trim();
 
-        if (!areFieldsValid(question1, question2, workExperience, educationalAttainment, address)) {
+        if (!areFieldsValid(workExperience, educationalAttainment, address)) {
             Toast.makeText(getApplicationContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
         }
         else {
             Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
-            saveDataInDb(question1, question2, workExperience, educationalAttainment, address);
+            circleProgressBar.setVisibility(View.VISIBLE);
+
+            saveDataInDb("", "", workExperience, educationalAttainment, address);
         }
     }
 
@@ -354,7 +360,6 @@ public class ApplyPage extends AppCompatActivity {
 
     private void saveDataToDatabase(String profileUrl, String resumeUrl, String licenseUrl, String question1, String question2, String workExperience, String educationalAttainment, String address){
 
-
         Application application = new Application(
                 MY_USER_ID,
                 jobId,
@@ -369,12 +374,31 @@ public class ApplyPage extends AppCompatActivity {
                 lattitude,
                 licenseUrl,
                 etAdditionalInfo.getText().toString(),
-                Helper.getCurrentDate()
-
+                Helper.getCurrentDate(),
+                "pending"
         );
 
         FirebaseManager.addData(applicationDb, application);
 
+//        applicationDb.push().setValue(application).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void unused) {
+//                Notifications notifications = new Notifications(
+//                        liveBus.getBusDriverId(),
+//                        relatedNodeId,
+//                        getResources().getString(R.string.seatReservationTitle),
+//                        getResources().getString(R.string.seatReservationMessage),
+//                        Helper.getCurrentDate(),
+//                        NotificationTypes.SUBMITTED_APPLICATION
+//                );
+//
+//
+//                FirebaseManager.addData(notificationDb, notifications);
+//            }
+//        });
+
+
+        circleProgressBar.setVisibility(View.GONE);
         new Helper(this).showToastLong("Application Sent!");
         startActivity(new Intent(this, PassengerJob.class));
     }
@@ -512,8 +536,6 @@ public class ApplyPage extends AppCompatActivity {
         cardQuestion = findViewById(R.id.card_question);
 
         layoutQuestion = findViewById(R.id.layout_question);
-        etQuestion1 = findViewById(R.id.et_question1);
-        etQuestion2 = findViewById(R.id.et_question2);
 
         cardResume = findViewById(R.id.card_resume);
 
@@ -547,6 +569,8 @@ public class ApplyPage extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         iv_profilePic = findViewById(R.id.iv_profilePic);
         iv_uploadPhotoBtn = findViewById(R.id.iv_uploadPhotoBtn);
+
+        circleProgressBar = findViewById(R.id.progressBar);
 
         try {
             ApplicationInfo appInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);

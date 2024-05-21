@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ApplyPage">
 
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_above="@id/bottomNavigationView">
+        android:layout_above="@id/bottomNavigationView"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
 
             <TextView
                 android:id="@+id/buses"
@@ -30,17 +32,17 @@
 
             <LinearLayout
                 android:id="@+id/lyout"
-                android:layout_below="@id/buses"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buses"
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/tv_fullname"
@@ -49,7 +51,7 @@
                         android:text="Loading..."
                         android:textColor="@color/black"
                         android:textSize="24sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -61,9 +63,9 @@
                         android:id="@+id/tv_phoneNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxHeight="25dp"
-                        android:gravity="center_vertical"
                         android:drawablePadding="4dp"
+                        android:gravity="center_vertical"
+                        android:maxHeight="25dp"
                         android:text="Loading" />
 
 
@@ -85,8 +87,8 @@
                         android:id="@+id/iv_uploadPhotoBtn"
                         android:layout_width="25dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/iv_profilePic"
                         android:layout_alignTop="@+id/iv_profilePic"
+                        android:layout_alignEnd="@+id/iv_profilePic"
                         android:src="@drawable/editprofile" />
 
                 </RelativeLayout>
@@ -100,40 +102,40 @@
                 android:layout_height="5dp"
                 android:layout_below="@id/lyout"
                 android:layout_margin="10dp"
-                android:background="@color/grey"/>
+                android:background="@color/grey" />
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvline"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_question">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textStyle="bold"
+                            android:text="Questions for the applicant"
                             android:textSize="18sp"
-                            android:text="Questions for the applicant" />
+                            android:textStyle="bold" />
 
                         <TextView
 
@@ -159,11 +161,10 @@
                 android:id="@+id/layout_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_question"
+                android:orientation="vertical"
                 android:padding="16dp"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -196,35 +197,35 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_resume"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_question"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_resume">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textStyle="bold"
+                            android:text="Resume/Bio Data"
                             android:textSize="18sp"
-                            android:text="Resume/Bio Data" />
+                            android:textStyle="bold" />
 
                         <TextView
 
@@ -250,49 +251,48 @@
                 android:id="@+id/layout_resume"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_resume"
-                android:padding="16dp"
-                android:visibility="gone"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_resume"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/file"/>
+                    android:src="@drawable/file" />
 
                 <Button
                     android:id="@+id/btn_uploadFile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload file"/>
+                    android:text="Upload file" />
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_resume"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_experience">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
@@ -327,44 +327,43 @@
                 android:id="@+id/layout_experience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_experience"
-                android:padding="16dp"
-                android:visibility="gone"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_workExperience"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Tap here to enter work experience. "/>
+                    android:text="Tap here to enter work experience. " />
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_experience"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_education">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
@@ -399,48 +398,47 @@
                 android:id="@+id/layout_education"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_education"
-                android:padding="16dp"
-                android:visibility="gone"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Enter your educational attainment. "/>
+                    android:text="Enter your educational attainment. " />
 
                 <EditText
                     android:id="@+id/et_educationalAttainment"
-                    android:hint="Enter your educational background"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your educational background" />
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_education"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_address">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
@@ -475,48 +473,47 @@
                 android:id="@+id/layout_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_address"
-                android:padding="16dp"
-                android:visibility="gone"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address. "/>
+                    android:text="Address. " />
 
                 <TextView
                     android:id="@+id/tv_address"
-                    android:hint="Tap to enter your address"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="Tap to enter your address" />
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_license"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_address"
                 android:layout_margin="8dp"
                 android:elevation="10dp"
-                app:cardCornerRadius="10dp"
-                android:id="@+id/card_license">
+                app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:padding="10dp">
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
 
@@ -551,24 +548,23 @@
                 android:id="@+id/layout_license"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_below="@id/card_license"
-                android:padding="16dp"
-                android:visibility="gone"
                 android:gravity="center"
-                >
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_license"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/file"/>
+                    android:src="@drawable/file" />
 
                 <Button
                     android:id="@+id/btn_uploadLicense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload file"/>
+                    android:text="Upload file" />
 
             </LinearLayout>
 
@@ -592,8 +588,8 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
-                android:hint="Write here"
                 android:gravity="start|top"
+                android:hint="Write here"
                 android:inputType="textMultiLine"
                 android:lines="5" />
 
@@ -605,25 +601,39 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/buttonColor"
-                android:text="Submit Application"
-                android:fontFamily="@font/poppins_medium"/>
+                android:fontFamily="@font/poppins_medium"
+                android:text="Submit Application" />
 
 
         </RelativeLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/scrollView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginEnd="150dp"
+        android:visibility="gone"
+        android:layout_marginBottom="316dp" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="500dp"
         android:layout_height="50dp"
-        android:id="@+id/bottomNavigationView"
         android:layout_alignParentBottom="true"
         android:background="@color/navbg"
         android:elevation="2dp"
-        app:menu="@menu/passenger_menu"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/passenger_menu" />
 
 
 </RelativeLayout>

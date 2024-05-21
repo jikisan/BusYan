@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import com.example.busyancapstone.Enum.ReservationStatus;
 import com.example.busyancapstone.Helper.Helper;
 import com.example.busyancapstone.Manager.FirebaseManager;
 import com.example.busyancapstone.Manager.MapsManager;
+import com.example.busyancapstone.Model.BusRoutes;
 import com.example.busyancapstone.Model.LiveBus;
 import com.example.busyancapstone.Model.LiveDrivers;
 import com.example.busyancapstone.Model.LivePassengers;
@@ -102,13 +104,14 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
     private static CustomAdapterBus adapterBus;
     private static SeatReservation reservation = SeatReservation.getInstance();
 
+    private static final ArrayList<BusRoutes> arrBusRoutes = new ArrayList<>();
     private static final ArrayList<LiveDrivers> arrLiveDrivers = new ArrayList<>();
     private static final ArrayList<LiveBus> arrLiveBus = new ArrayList<>();
     private static final ArrayList<Marker> busMarkers = new ArrayList<>();
     private static final ArrayList<String> arrBusCodes = new ArrayList<>();
 
     private DatabaseReference liveDriversDb, livePassengerDb, seatReservationDb, notificationDb,
-        busRoutesDb;
+            busRoutesDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +125,9 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         livePassengerDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.LIVE_PASSENGERS.getValue());
         busRoutesDb = FirebaseDatabase.getInstance().getReference(FirebaseReferences.BUS_ROUTES.getValue());
 
-        setLocationRequest();
         references();
+        getBusRoutes();
+        setLocationRequest();
         clickActions();
 
         adapterBus = new CustomAdapterBus(this, arrLiveBus, myLatLng, apiKey);
@@ -131,10 +135,11 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         adapterBus.notifyDataSetChanged();
     }
 
+
     private void setLocationRequest() {
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(5000); // Set interval to 10 seconds
-        locationRequest.setFastestInterval(5000);
+        locationRequest.setInterval(15000);
+        locationRequest.setFastestInterval(15000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -157,7 +162,13 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         public void run() {
 
-            Log.d(TAG, "run: busUpdateRunnable");
+            SeatReservation rs = SeatReservation.getInstance();
+
+            if (tv_destination.getText().toString() == "") {
+
+                Log.d(TAG, "run: busUpdateRunnable");
+                Log.d(TAG, "tv_destination: " + tv_destination.getText().toString());
+
                 liveDriversDb.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -227,8 +238,7 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                                 }
                             });
 
-                        }
-                        else {
+                        } else {
                             Log.d(TAG, "arrLiveBus is empty ");
                             adapterBus.clearData();
                             adapterBus.notifyDataSetChanged();
@@ -242,9 +252,11 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-
-                // Schedule the next update
                 handler.postDelayed(this, UPDATE_INTERVAL);
+
+            }
+
+            // Schedule the next update
 
         }
     };
@@ -256,15 +268,13 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
             if (item.getItemId() == R.id.passenger_home) {
                 return true;
 
-            }
-            else if (item.getItemId() == R.id.passenger_profile) {
+            } else if (item.getItemId() == R.id.passenger_profile) {
                 startActivity(new Intent(getApplicationContext(), PassengerProfile.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
 
-            }
-            else if (item.getItemId() == R.id.passenger_notification) {
+            } else if (item.getItemId() == R.id.passenger_notification) {
                 startActivity(new Intent(getApplicationContext(), PassengerNotification.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -275,40 +285,90 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
             return false;
         });
 
-        tv_destination.setOnClickListener( v -> {
+        tv_destination.setOnClickListener(v -> {
 
             startActivity(new Intent(this, BusSearchPage.class));
         });
 
-        busListView.setOnItemClickListener( (adapterView, view, i, l) -> {
+        busListView.setOnItemClickListener((adapterView, view, i, l) -> {
 
-            if(TextUtils.isEmpty(tv_destination.getText())){
-                Toast.makeText(this, "Please choose a destination. ", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            if (TextUtils.isEmpty(tv_destination.getText())) {
+                Toast.makeText(this, "Please choose a destination. ", Toast.LENGTH_LONG).show();
+            } else {
+                String location = reservation.getStartLocation();
+                String[] locationSplit = location.split(" ");
+                String startLocKeyword = locationSplit[0].toLowerCase().replace(",", "");
+
                 LiveBus liveBus = (LiveBus) adapterView.getItemAtPosition(i);
-                showReserveSeatDialog(liveBus.getBusCode(), liveBus);
-            }
+                String busCode = liveBus.getBusCode();
 
+                if (!isInBusRoute(startLocKeyword, busCode)) {
+                    Toast.makeText(this, "Bus doesn't drive from your location. Please choose another bus.. ", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Bus selected: " + liveBus.getBusCode(), Toast.LENGTH_SHORT).show();
+                    showReserveSeatDialog(liveBus.getBusCode(), liveBus);
+                }
+            }
 
         });
 
     }
 
+    private boolean isInBusRoute(String startLocKeyword, String busCode) {
+
+        for (BusRoutes busRoutes : arrBusRoutes) {
+            String stopName = busRoutes.getStopName().toLowerCase();
+            boolean isBusCode = busRoutes.getBusCode().equalsIgnoreCase(busCode);
+            boolean isStopName = stopName.contains(startLocKeyword);
+            if (isBusCode && isStopName) {
+                Log.d("isInBusRoute", "Bus found: " + busCode + " Stop name: " + stopName + " Keyword: " + startLocKeyword);
+
+                return true;
+            }
+        }
+
+        Log.d("isInBusRoute", "Bus not found: " + busCode);
+        return false;
+    }
+
+    private void getBusRoutes() {
+
+
+        busRoutesDb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                arrBusRoutes.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    BusRoutes busRoutes = ds.getValue(BusRoutes.class);
+                    arrBusRoutes.add(busRoutes);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
     private void startLocationUpdates() {
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-             ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 
-                if(mMap != null) mMap.setMyLocationEnabled(true);
+                stopBusDriverUpdates();
+                System.out.println("bus driver update stopped");
+
+                if (mMap != null) mMap.setMyLocationEnabled(true);
                 client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 
-                if(reservation.getDestination() != null){
+                if (reservation.getDestination() != null && !reservation.getDestination().isEmpty()) {
 
                     if (busAsyncTask != null && busAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
                         busAsyncTask.cancel(true);
@@ -324,27 +384,23 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                     LatLng endLatLng = new LatLng(reservation.getDestinationLat(), reservation.getDestinationLong());
                     MapsManager.addStartAndEndMarker(startLatLng, endLatLng, mMap);
 //                    MapsManager.drawPolyline(startLatLng, endLatLng, mMap);
-                    tv_destination.setText(reservation.getDestination());
+                    tv_destination.setText(reservation.getStartLocation());
 
 //                    LatLng destinationLatLng = new LatLng(reservation.getDestinationLat(), reservation.getDestinationLong());
 //                    MapsManager.zoomCamera(destinationLatLng, mMap);
 
-                }
-                else {
-
+                } else {
                     Log.d(TAG, "Empty Destination");
                     zoomToUserLocation();
                     startBusUpdates();
                 }
 
 
-            }
-            else{
+            } else {
                 startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
-        }
-        else {
-            requestPermissions( new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+        } else {
+            requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
     }
 
@@ -353,13 +409,13 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         deleteLocationInDb();
     }
 
-    private void updateLocationInDb(){
+    private void updateLocationInDb() {
 
-        LivePassengers liveDrivers = new LivePassengers(My_USER_ID, lattitude, longitude, Helper.getCurrentDate());
-        FirebaseManager.addData(livePassengerDb, liveDrivers, My_USER_ID);
+        LivePassengers myLocation = new LivePassengers(My_USER_ID, lattitude, longitude, Helper.getCurrentDate());
+        FirebaseManager.addData(livePassengerDb, myLocation, My_USER_ID);
     }
 
-    private void deleteLocationInDb(){
+    private void deleteLocationInDb() {
         FirebaseManager.deleteData(livePassengerDb, My_USER_ID);
     }
 
@@ -369,10 +425,10 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         handler.post(busUpdateRunnable);
     }
 
-    private void stopBusDriverUpdates(){
+    private void stopBusDriverUpdates() {
         isPassengerUpdatesRunning = false;
         arrLiveBus.clear();
-        arrLiveDrivers.clear();        
+        arrLiveDrivers.clear();
         handler.removeCallbacks(busUpdateRunnable);
 
         removePassengerMarkers();
@@ -380,7 +436,7 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
 
     private static void removePassengerMarkers() {
 
-        if(!busMarkers.isEmpty() || busMarkers == null){
+        if (!busMarkers.isEmpty() || busMarkers == null) {
             for (Marker marker : busMarkers) {
                 MapsManager.removeMarker(marker);
             }
@@ -409,35 +465,33 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                         reservation.setStatus(ReservationStatus.PENDING);
 
 
-                        if(reservation.getStartLocation().isEmpty() || reservation.getStartLocation() == ""){
+                        if (reservation.getStartLocation().isEmpty() || reservation.getStartLocation() == "") {
                             Toast.makeText(PassengerBus.this, "Please choose starting location. ", Toast.LENGTH_LONG).show();
-                        }
-                        else if (reservation.getDestination().isEmpty() || reservation.getDestination() == ""){
+                        } else if (reservation.getDestination().isEmpty() || reservation.getDestination() == "") {
                             Toast.makeText(PassengerBus.this, "Please choose destination. ", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
 
-                            String relatedNodeId;
-
-                            try {
-                                relatedNodeId = String.valueOf(Helper.getDateInMillis(currentDate));
-                            } catch (ParseException e) {
-                                throw new RuntimeException(e);
-                            }
-
-                            Notifications notifications = new Notifications(
-                                    liveBus.getBusDriverId(),
-                                    relatedNodeId,
-                                    getResources().getString(R.string.seatReservationTitle),
-                                    getResources().getString(R.string.seatReservationMessage),
-                                    Helper.getCurrentDate(),
-                                    NotificationTypes.RESERVATIONS
-                            );
-
-
-                            FirebaseManager.addData(seatReservationDb, reservation, relatedNodeId);
-                            FirebaseManager.addData(notificationDb, notifications);
-                            reservation.clear();
+//                            String relatedNodeId;
+//
+//                            try {
+//                                relatedNodeId = String.valueOf(Helper.getDateInMillis(currentDate));
+//                            } catch (ParseException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//
+//                            Notifications notifications = new Notifications(
+//                                    liveBus.getBusDriverId(),
+//                                    relatedNodeId,
+//                                    getResources().getString(R.string.seatReservationTitle),
+//                                    getResources().getString(R.string.seatReservationMessage),
+//                                    Helper.getCurrentDate(),
+//                                    NotificationTypes.RESERVATIONS
+//                            );
+//
+//
+//                            FirebaseManager.addData(seatReservationDb, reservation, relatedNodeId);
+//                            FirebaseManager.addData(notificationDb, notifications);
+//                            reservation.clear();
                             showConfirmationDialog();
                         }
 
@@ -474,14 +528,13 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    
-
     @Override
     protected void onResume() {
         super.onResume();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Log.d(TAG, "onResume: ");
     }
 
     @Override
@@ -489,6 +542,8 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         super.onPause();
 
         Log.d(TAG, "onPause: ");
+        stopBusDriverUpdates();
+
 //        stopLocationUpdates();
 //        stopBusDriverUpdates();
     }
@@ -496,7 +551,7 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onStop() {
         super.onStop();
-
+        stopBusDriverUpdates();
         Log.d(TAG, "onStop: ");
 //        stopLocationUpdates();
 //        stopBusDriverUpdates();
@@ -506,12 +561,14 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stopBusDriverUpdates();
 
         Log.d(TAG, "onDestroy: ");
 //        stopLocationUpdates();
 //        stopBusDriverUpdates();
         reservation.clear();
     }
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -549,15 +606,13 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
 
 //                MapsManager.addMarker(place.getLatLng(), address, mMap);
 
-                tv_destination.setText(address);
+//                tv_destination.setText(address);
 
-            }
-            else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-            }
-            else if (resultCode == RESULT_CANCELED) {
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            } else if (resultCode == RESULT_CANCELED) {
             }
 
-            startBusUpdates();
+//            startBusUpdates();
         }
 
     }
@@ -584,6 +639,7 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+
     private static class BusAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private WeakReference<ProgressBar> progressBarWeakReference;
@@ -601,14 +657,12 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
             this.progressBar = progressBarWeakReference.get();
             this.listView = listViewWeakReference.get();
             this.noBusMessage = textViewWeakReference.get();
-
         }
 
         @Override
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
         }
-
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -637,7 +691,7 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
                                 String[] destinationSplit = destination.split(" ");
                                 String keyWord = destinationSplit[0].toLowerCase().replace(",", "");
 
-                                Log.d(TAG, "Stop name: " + stopName.toLowerCase());
+//                                Log.d(TAG, "Stop name: " + stopName.toLowerCase());
 
                                 if (stopName.toLowerCase().contains(keyWord)) {
                                     Log.d(TAG, "Keyword: " + keyWord);
@@ -671,70 +725,75 @@ public class PassengerBus extends AppCompatActivity implements OnMapReadyCallbac
             progressBar.setVisibility(View.GONE);
 
         }
-    }
 
-    private static void retrieveLiveDrivers(String busCode, ListView listView, TextView noBusMessage) {
+        private static void retrieveLiveDrivers(String busCode, ListView listView, TextView noBusMessage) {
 
-        DatabaseReference liveDriversDb = FirebaseDatabase.getInstance().getReference().child(FirebaseReferences.LIVE_DRIVERS.getValue());
+            DatabaseReference liveDriversDb = FirebaseDatabase.getInstance().getReference().child(FirebaseReferences.LIVE_DRIVERS.getValue());
 
-        liveDriversDb.orderByChild("busCode").equalTo(busCode).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            liveDriversDb.orderByChild("busCode").equalTo(busCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if (snapshot.exists()) {
+                    arrLiveDrivers.clear();
+                    arrLiveBus.clear();
+                    busMarkers.clear();
 
-                    for (DataSnapshot driverSnapshot : snapshot.getChildren()) {
-                        LiveDrivers liveDrivers = driverSnapshot.getValue(LiveDrivers.class);
+                    if (snapshot.exists()) {
 
-                        if (liveDrivers != null) {
-                            LatLng busLatLng = new LatLng(liveDrivers.getLattitude(), liveDrivers.getLongitude());
+                        for (DataSnapshot driverSnapshot : snapshot.getChildren()) {
+                            LiveDrivers liveDrivers = driverSnapshot.getValue(LiveDrivers.class);
 
-                            String busDriverId = liveDrivers.getBusDriverId();
-                            String route = liveDrivers.getRoute();
-                            String busCode = liveDrivers.getBusCode();
-                            String plateNumber = liveDrivers.getPlateNumber();
-                            String distance = MapsManager.calculateDistance(myLatLng, busLatLng);
-                            String travelTime = MapsManager.estimateTravelTime(myLatLng, busLatLng, apiKey);
+                            if (liveDrivers != null) {
+                                LatLng busLatLng = new LatLng(liveDrivers.getLattitude(), liveDrivers.getLongitude());
 
-                            LiveBus liveBus = new LiveBus(
-                                    busDriverId,
-                                    route,
-                                    busCode,
-                                    plateNumber,
-                                    distance,
-                                    travelTime
-                            );
+                                String busDriverId = liveDrivers.getBusDriverId();
+                                String route = liveDrivers.getRoute();
+                                String busCode = liveDrivers.getBusCode();
+                                String plateNumber = liveDrivers.getPlateNumber();
+                                String distance = MapsManager.calculateDistance(myLatLng, busLatLng);
+                                String travelTime = MapsManager.estimateTravelTime(myLatLng, busLatLng, apiKey);
 
-                            arrLiveDrivers.add(liveDrivers);
-                            arrLiveBus.add(liveBus);
+                                LiveBus liveBus = new LiveBus(
+                                        busDriverId,
+                                        route,
+                                        busCode,
+                                        plateNumber,
+                                        distance,
+                                        travelTime
+                                );
 
-                            // Add markers
-                            removePassengerMarkers();
-                            busMarkers.add(MapsManager.addBusMarker(busLatLng, mMap));
-                            MapsManager.zoomCamera(busLatLng, mMap);
+                                arrLiveDrivers.add(liveDrivers);
+                                arrLiveBus.add(liveBus);
 
+                                // Add markers
+                                removePassengerMarkers();
+                                busMarkers.add(MapsManager.addBusMarker(busLatLng, mMap));
+                                MapsManager.zoomCamera(busLatLng, mMap);
+
+                            }
+                        }
+
+                        Collections.sort(arrLiveBus, new LiveBus.DistanceComparator());
+                        adapterBus.notifyDataSetChanged();
+
+                        if (arrBusCodes.isEmpty()) {
+                            listView.setVisibility(View.GONE);
+                            noBusMessage.setVisibility(View.VISIBLE);
+                        } else {
+                            listView.setVisibility(View.VISIBLE);
+                            noBusMessage.setVisibility(View.GONE);
                         }
                     }
-
-                    Collections.sort(arrLiveBus, new LiveBus.DistanceComparator());
-                    adapterBus.notifyDataSetChanged();
-
-                    if(arrBusCodes.isEmpty()){
-                        listView.setVisibility(View.GONE);
-                        noBusMessage.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        listView.setVisibility(View.VISIBLE);
-                        noBusMessage.setVisibility(View.GONE);
-                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle the error
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle the error
+                }
+            });
+        }
+
+
     }
 
 

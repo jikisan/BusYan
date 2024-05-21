@@ -39,6 +39,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
@@ -146,10 +147,10 @@ public class PassengerEditProfile extends AppCompatActivity {
     private void updateProfile() {
 
         if (imageUri != null) {
-            System.out.println("no image");
+            System.out.println("with image");
             saveImageUrlToStorage(imageUri);
         } else {
-            System.out.println("with image");
+            System.out.println("no image");
             saveDataToDatabase(currentImageUrl);
         }
 
@@ -193,11 +194,11 @@ public class PassengerEditProfile extends AppCompatActivity {
 
                     Passenger passenger = snapshot.getValue(Passenger.class);
 
-                    Helper.loadImage(FirebaseManager.getProfileImageUri(), iv_profilePic);
+//                    Helper.loadImage(FirebaseManager.getProfileImageUri(), iv_profilePic);
 
                     currentImageUrl = passenger.getImageUrl();
                     Picasso.get()
-                            .load(currentImageUrl)
+                            .load(passenger.getImageUrl())
                             .placeholder(R.drawable.passengerpic)
                             .into(iv_profilePic);
 
@@ -246,16 +247,21 @@ public class PassengerEditProfile extends AppCompatActivity {
         String newImageName = photoUri.getLastPathSegment();
         StorageReference userPicRef = passengerStorage.child(MY_USER_ID).child(newImageName);
 
-        userPicRef.putFile(photoUri);
-        userPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
+        userPicRef.putFile(photoUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
-                String imageUrl = uri.toString();
-                saveDataToDatabase(imageUrl);
-            }
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-        });
+                        userPicRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String imageUrl = uri.toString();
+                                saveDataToDatabase(imageUrl);
+                            }
+                        });
+                    }
+                });
 
     }
 

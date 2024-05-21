@@ -49,6 +49,7 @@
         android:clickable="true"
         app:cardCornerRadius="10dp"
         android:layout_marginTop="280dp"
+        android:visibility="gone"
         android:backgroundTint="@color/cardcolor"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-110dp">
@@ -79,7 +80,7 @@
         android:id="@+id/buspass_card"
         android:clickable="true"
         app:cardCornerRadius="10dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="280dp"
         android:backgroundTint="@color/cardcolor1"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/job_card"

@@ -5,6 +5,8 @@ public enum FirebaseReferences {
     PASSENGER("Passengers"),
     BUS_DRIVER("BusDrivers"),
     BUS_ROUTES("BusRoutes"),
+    BUS_DETAILS("BusDetails"),
+    BUS_SCHED("BusSchedules"),
     EMPLOYEES("Employees"),
     RESERVATIONS("SeatReservations"),
     JOBS("Jobs"),

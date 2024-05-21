@@ -226,11 +226,11 @@ public class SignUpPassenger extends AppCompatActivity {
         Intent intent = new Intent(this, VerificationActivity.class);
 //        intent.putExtra("verificationId", verificationId);
 //        intent.putExtra("resendingToken", resendingToken);
-        intent.putExtra("fullName", fullName);
-        intent.putExtra("email", email);
-        intent.putExtra("password", password);
-        intent.putExtra("phoneNum", phoneNum);
-        intent.putExtra("imageUrl", imageUrl);
+        intent.putExtra("fullName", fullName.trim());
+        intent.putExtra("email", email.trim());
+        intent.putExtra("password", password.trim());
+        intent.putExtra("phoneNum", phoneNum.trim());
+        intent.putExtra("imageUrl", imageUrl.trim());
         intent.putExtra("isGoogleConnected", isGoogleConnected);
 
         startActivity(intent);

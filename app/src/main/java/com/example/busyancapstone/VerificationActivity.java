@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class VerificationActivity extends AppCompatActivity {
 
     private MaterialButton verifybtn;
     private PinView otp;
+    private ProgressBar progress_bar;
     private LinearLayout layoutTimer;
     private TextView tvTimer, tvResendCode;
     private PhoneAuthProvider.ForceResendingToken resendingToken;
@@ -75,13 +77,14 @@ public class VerificationActivity extends AppCompatActivity {
         tvTimer = findViewById(R.id.tvTimer);
         tvResendCode = findViewById(R.id.tvResendCode);
         layoutTimer = findViewById(R.id.layoutTimer);
+        progress_bar = findViewById(R.id.progress_bar);
 
         String dbName = FirebaseReferences.PASSENGER.getValue();
         passengerDb = FirebaseDatabase.getInstance().getReference(dbName);
         mAuth= FirebaseAuth.getInstance();
 
         retrieveDataFromIntent();
-        startTimer();
+
 
 
         verifybtn.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +94,8 @@ public class VerificationActivity extends AppCompatActivity {
                 String code = otp.getText().toString();
 
                 if(code.length() == 6){
-
+                    progress_bar.setVisibility(View.VISIBLE);
+                    Toast.makeText(VerificationActivity.this, "Verifying OTP...", Toast.LENGTH_SHORT).show();
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
                     signInWithPhoneAuthCredential(credential);
                 }
@@ -127,7 +131,6 @@ public class VerificationActivity extends AppCompatActivity {
             isGoogleConnected = intent.getBooleanExtra("isGoogleConnected", false);
 
             sendOtp(phoneNum, false);
-            Toast.makeText(this, "OTP code sent!", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -144,7 +147,8 @@ public class VerificationActivity extends AppCompatActivity {
                             public void onCodeSent(@NonNull String s,
                                                    @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                 super.onCodeSent(s, forceResendingToken);
-
+                                Toast.makeText(VerificationActivity.this, "OTP code sent!", Toast.LENGTH_SHORT).show();
+                                startTimer();
                                 Log.d(TAG, "onCodeSent:" + s);
                                 verificationId = s;
                                 resendingToken = forceResendingToken;
@@ -182,16 +186,15 @@ public class VerificationActivity extends AppCompatActivity {
         Log.d(TAG, "signInWithPhoneAuthCredential: ");
 
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, task -> {
-
-                    String phoneId = task.getResult().getUser().getUid();
-                    if (task.isSuccessful()) {
-                        mAuth.getInstance().getCurrentUser().delete();
-
-                        FirebaseUser currentUser = task.getResult().getUser();
-                        createUserWithEmailPassword();
-                    }
+                .addOnSuccessListener(this, task -> {
+                    mAuth.getInstance().getCurrentUser().delete();
+                    createUserWithEmailPassword();
+                })
+                .addOnFailureListener(this, e -> {
+                    Log.d(TAG, "signInWithPhoneAuthCredential: " + e.getMessage());
+                    progress_bar.setVisibility(View.GONE);
                 });
+
     }
 
     private void createUserWithEmailPassword(){
@@ -209,6 +212,7 @@ public class VerificationActivity extends AppCompatActivity {
 
                             AuthCredential emailCredential = EmailAuthProvider.getCredential(email, password);
                             signInUser(emailCredential);
+                            progress_bar.setVisibility(View.GONE);
 
 
                         }

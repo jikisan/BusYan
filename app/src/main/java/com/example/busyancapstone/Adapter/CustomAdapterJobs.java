@@ -76,7 +76,7 @@ public class CustomAdapterJobs extends BaseAdapter {
         ImageView notBookmark = convertView.findViewById(R.id.iv_notBookmark);
 
         title.setText(tempJobs.get(position).getJob().getTitle());
-        company.setText(tempJobs.get(position).getJob().getCompany());
+        company.setText(tempJobs.get(position).getJob().getCompanyName());
         location.setText(tempJobs.get(position).getJob().getLocation());
         salary.setText(tempJobs.get(position).getJob().getSalary());
         postDate.setText(tempJobs.get(position).getJob().getPostDate());

@@ -21,48 +21,48 @@
         app:itemRippleColor="@android:color/transparent"
         app:labelVisibilityMode="unlabeled"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/eclipseprofile"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="1dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="25dp"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/passengerpic"
-        android:layout_marginTop="55dp"
-        android:layout_marginLeft="45dp"/>
 
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jacky Taldo"
+        android:layout_alignTop="@+id/iv_profilePic"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="125dp"
+        android:layout_toEndOf="@+id/iv_profilePic"
         android:fontFamily="@font/poppins_bold"
-        android:layout_marginTop="55dp"
-        android:textSize="17dp"
-        android:layout_marginLeft="125dp"/>
+        android:text="David Brigoli"
+        android:textSize="17dp" />
 
     <TextView
+        android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="jackytaldo@gmail.com"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignStart="@+id/tv_name"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="79dp"
-        android:layout_marginLeft="125dp"/>
+        android:text="davidbrigoli@gmail.com" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editpro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="130dp"
+        android:layout_below="@+id/tv_email"
+        android:layout_alignStart="@+id/tv_email"
         android:backgroundTint="@color/navbackground"
         android:fontFamily="@font/poppins"
         android:text="Edit Profile"
         android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/myaccount"
@@ -77,16 +77,36 @@
 
     <TextView
         android:id="@+id/saved"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Saved                                                                              "
+        android:layout_alignStart="@+id/passline"
+        android:layout_alignTop="@+id/passline"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:clickable="true"
         android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="20dp"
+        android:text="Saved"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/saved"
+        android:layout_alignStart="@+id/saved"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="25dp"
-        android:textSize="16dp"
-        android:layout_below="@id/myaccount"
-        android:clickable="true"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:clickable="true"
+        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+        android:fontFamily="@font/poppins"
+        android:text="History"
+        android:textSize="16dp" />
+
+
 
 
 
@@ -103,9 +123,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General"
-        android:layout_below="@+id/passline"
+        android:layout_below="@+id/history"
         android:fontFamily="@font/poppins"
-        android:layout_marginTop="-35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="25dp"
         android:textSize="16dp"
         android:textStyle="bold"/>
@@ -151,11 +171,12 @@
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="380dp"
         android:layout_height="300dp"
-        android:src="@drawable/line3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp"/>
+        android:layout_marginTop="280dp"
+        android:src="@drawable/line3" />
 
 
 

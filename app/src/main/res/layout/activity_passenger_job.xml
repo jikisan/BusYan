@@ -57,6 +57,14 @@
         android:textSize="20dp"
         android:textColor="@color/black"/>
 
+    <ImageView
+        android:id="@+id/iv_tempAddJobBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="500dp"
         android:layout_height="50dp"
@@ -70,5 +78,6 @@
         app:itemRippleColor="@android:color/transparent"
         app:labelVisibilityMode="unlabeled"/>
 
+    
 
 </RelativeLayout>
