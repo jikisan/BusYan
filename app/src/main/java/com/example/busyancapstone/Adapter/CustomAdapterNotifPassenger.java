@@ -112,8 +112,6 @@ public class CustomAdapterNotifPassenger extends BaseAdapter {
 
                     Log.d("NotificationActivity", "Seat Reservation ID: " + seatReservationId);
 
-
-
                 }
             }
 

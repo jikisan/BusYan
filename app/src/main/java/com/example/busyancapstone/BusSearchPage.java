@@ -1,8 +1,10 @@
 package com.example.busyancapstone;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -104,14 +106,12 @@ public class BusSearchPage extends AppCompatActivity {
             if (item.getItemId() == R.id.passenger_home) {
 
                 return true;
-            }
-            else if (item.getItemId() == R.id.passenger_profile) {
+            } else if (item.getItemId() == R.id.passenger_profile) {
                 startActivity(new Intent(getApplicationContext(), PassengerProfile.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;
-            }
-            else if (item.getItemId() == R.id.passenger_notification) {
+            } else if (item.getItemId() == R.id.passenger_notification) {
                 startActivity(new Intent(getApplicationContext(), PassengerNotification.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
@@ -121,12 +121,12 @@ public class BusSearchPage extends AppCompatActivity {
             return false;
         });
 
-        tv_start.setOnClickListener( v -> {
+        tv_start.setOnClickListener(v -> {
             Intent intent = MapsManager.searchPlace(this);
             startActivityForResult(intent, START_REQUEST_CODE);
         });
 
-        tv_destination.setOnClickListener( v -> {
+        tv_destination.setOnClickListener(v -> {
             Intent intent = MapsManager.searchPlace(this);
             startActivityForResult(intent, DESTINATION_REQUEST_CODE);
         });
@@ -188,35 +188,48 @@ public class BusSearchPage extends AppCompatActivity {
             }
         });
 
-        btn_save.setOnClickListener( v -> {
+        btn_save.setOnClickListener(v -> {
 
-            Toast.makeText(this, "Searching for bus...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, PassengerBus.class));
+            float distance = getDistance();
+            SeatReservation rs = SeatReservation.getInstance();
+
+            if (rs.getStartLocation().isEmpty() || rs.getDestination().isEmpty()) {
+                Toast.makeText(this, "Please select start and destination address", Toast.LENGTH_SHORT).show();
+            }
+            else if (rs.getStartLocation() == "" || rs.getDestination() == "") {
+                Toast.makeText(this, "Please select start and destination address", Toast.LENGTH_SHORT).show();
+            }
+            else if (rs.getStartLocation().equalsIgnoreCase(rs.getDestination())) {
+                Toast.makeText(this, "Start and destination address cannot be the same", Toast.LENGTH_SHORT).show();
+            } else if (distance < 100) {
+                Toast.makeText(this, "Destination is too close to your current location", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Searching for bus...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, PassengerBus.class));
+            }
+
         });
 
-        addressListview.setOnItemClickListener( ((adapterView, view, i, l) -> {
+        addressListview.setOnItemClickListener(((adapterView, view, i, l) -> {
 
             PlacesInfo placesInfo = (PlacesInfo) adapterView.getItemAtPosition(i);
             SeatReservation reservation = SeatReservation.getInstance();
 
-            if(auto_start.isFocused()){
+            if (auto_start.isFocused()) {
 
                 auto_start.setText(placesInfo.getPlace());
                 reservation.setStartLocation(placesInfo.getPlace());
                 reservation.setStartLat(placesInfo.getLatitude());
                 reservation.setStartLong(placesInfo.getLongitude());
 
-            }
-            else if(auto_destination.isFocused()){
+            } else if (auto_destination.isFocused()) {
 
                 auto_destination.setText(placesInfo.getPlace());
                 reservation.setDestination(placesInfo.getPlace());
                 reservation.setDestinationLat(placesInfo.getLatitude());
                 reservation.setDestinationLong(placesInfo.getLongitude());
 
-
-            }
-            else {
+            } else {
                 return;
             }
 
@@ -229,14 +242,30 @@ public class BusSearchPage extends AppCompatActivity {
             Log.d(TAG, "End Longitude:" + reservation.getDestinationLong());
         }));
 
-        iv_mapsBtn.setOnClickListener( view -> {
+        iv_mapsBtn.setOnClickListener(view -> {
 
-            if(addressListview.isEnabled()){
+            if (addressListview.isEnabled()) {
                 addressListview.setEnabled(false);
-
             }
 
         });
+    }
+
+    private static float getDistance() {
+        SeatReservation sr = SeatReservation.getInstance();
+        Location start = new Location("Location 1");
+        start.setLatitude(sr.getStartLat());
+        start.setLongitude(sr.getStartLong());
+
+        Location destination = new Location("Location 2");
+        destination.setLatitude(sr.getDestinationLat());
+        destination.setLongitude(sr.getDestinationLong());
+
+        // Calculate the distance between the two locations
+        float distance = start.distanceTo(destination);
+        Log.d(TAG, "Distance: " + distance);
+
+        return distance;
     }
 
 //    @Override
@@ -281,7 +310,7 @@ public class BusSearchPage extends AppCompatActivity {
 //        }
 //    }
 
-    private void asyncMap(Double latitude, Double longitude){
+    private void asyncMap(Double latitude, Double longitude) {
 
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -320,6 +349,7 @@ public class BusSearchPage extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class PlacesApiRequest extends AsyncTask<String, Void, List<PlacesInfo>> {
 
         private ProgressBar progress_circular;
@@ -347,10 +377,7 @@ public class BusSearchPage extends AppCompatActivity {
         @Override
         protected List<PlacesInfo> doInBackground(String... input) {
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(PLACES_API_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(PLACES_API_BASE).addConverterFactory(GsonConverterFactory.create()).build();
 
             PlacesApiService service = retrofit.create(PlacesApiService.class);
             String components = "country:PH";
@@ -393,12 +420,10 @@ public class BusSearchPage extends AppCompatActivity {
             if (resultsList != null) {
                 addressListview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-            }
-            else {
+            } else {
                 // Handle the case where the result is null
             }
         }
-
 
 
         private List<String> parseJson(JsonObject jsonResponse) {
